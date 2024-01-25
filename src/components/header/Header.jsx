@@ -10,7 +10,7 @@ import userIcon from "../../assets/images/user-icon.png";
 
 import { Container, Row } from "reactstrap";
 import { useSelector } from "react-redux";
-import useAuth from "../../custom-hooks/useAuth";
+import useAuth from "../../custom-hooks/useAuthentication";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
