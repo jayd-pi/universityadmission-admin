@@ -1,112 +1,96 @@
 import React from "react";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
-import "./footer.css";
 
 const Footer = () => {
   const year = new Date().getFullYear();
-
   return (
-    <footer className="footer">
-      <Container>
-        <Row>
-          <Col lg="4" md="6" className="mb-4">
-            <div className="logo">
-              <div>
-                <h1 className="text-white">Efurniture</h1>
+    <footer className="bg-gray-800 text-white py-12">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="mb-4 lg:col-span-1">
+            <iframe
+              title="Google Maps"
+              className="w-full h-80"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124254.41468384612!2d106.70033386653754!3d10.762622791812793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2f195d0f13%3A0xf06b66d73ba6b0d3!2zVHLGsOG7nW5nIMSQ4bqhaSBIw6AgTuG6tW5nIFTDom4gUXXhuqNuZywgVGjhu6V5IFRo4bq_IENhbywgUGjGsOG7nW5nIDEwMDAwMDAsIFZpZXRuYW0gVMOyYSBOYW0!5e0!3m2!1svi!2s!4v1643100471841!5m2!1svi!2s"
+              allowFullScreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div className="mb-4 lg:col-span-3 flex justify-between">
+            <div className="flex flex-col">
+              <div className="mb-4">
+                <div className="logo">
+                  <div>
+                    <h1 className="text-2xl font-bold">Efurniture</h1>
+                  </div>
+                </div>
+                <p className="mt-4 text-gray-300">
+                  <span className="block leading-8">
+                    Tên công ty: Công ty CP một thành viên Lofi Furniture
+                  </span>
+                  <span className="block leading-8">
+                    Địa chỉ: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000
+                  </span>
+                  <span className="block leading-8">
+                    Email: efurniture@gmail.com
+                  </span>
+                  <span className="block leading-8">
+                    Hotline: 1900 8098
+                  </span>
+                </p>
               </div>
             </div>
-            <p className="footer__text mt-4">
-              Tên công ty: Công ty CP một thành viên Lofi Furniture<br />
-              Địa chỉ: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000<br />
-              Email: efurniture@gmail.com<br />
-              Hotline: 1900 8098
-            </p>
-          </Col>
 
-          <Col lg="3" md="3" className="mb-4">
-            <div className="footer__quick-links">
-              <h4 className="quick__links-title">Top Categories</h4>
-              <ListGroup>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Mobile Phones</Link>
-                </ListGroupItem>
+            <div className="flex flex-col ml-1">
+              <div className="mb-4">
+                <h4 className="text-xl font-semibold mb-4">Useful Links</h4>
+                <ul>
+                  <li className="mb-2">
+                    <Link to="/shop" className="text-gray-300 hover:text-white">Shop</Link>
+                  </li>
+                  <li className="mb-2">
+                    <Link to="/cart" className="text-gray-300 hover:text-white">Cart</Link>
+                  </li>
+                  <li className="mb-2">
+                    <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
+                  </li>
+                  <li className="mb-2">
+                    <Link to="#" className="text-gray-300 hover:text-white">Privacy Policy</Link>
+                  </li>
+                </ul>
+              </div>
 
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Modern Sofa</Link>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Arm Chair</Link>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Smart Watches</Link>
-                </ListGroupItem>
-              </ListGroup>
+              <div>
+                <h4 className="text-xl font-semibold mb-3 ml-1">Contact</h4>
+                <ul className="footer__contact ">
+                  <li className="mb-2 flex items-center ">
+                    <i className="ri-map-pin-line mr-2"></i>
+                    <p className="text-gray-300">Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000</p>
+                  </li>
+                  <li className="mb-2 flex items-center">
+                    <i className="ri-phone-line mr-2"></i>
+                    <p className="text-gray-300">028 7300 5588</p>
+                  </li>
+                  <li className="mb-2 flex items-center">
+                    <i className="ri-mail-line mr-2"></i>
+                    <p className="text-gray-300">efurniture@gmail.com</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </Col>
+          </div>
+        </div>
 
-          <Col lg="2" md="3" className="mb-4">
-            <div className="footer__quick-links">
-              <h4 className="quick__links-title">Useful Links</h4>
-              <ListGroup>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/shop">Shop</Link>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/cart">Cart</Link>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/login">Login</Link>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Privacy Policy</Link>
-                </ListGroupItem>
-              </ListGroup>
-            </div>
-          </Col>
-
-          <Col lg="3" md="4">
-            <div className="footer__quick-links">
-              <h4 className="quick__links-title">Contact</h4>
-              <ListGroup className="footer__contact">
-                <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
-                  <span>
-                    <i className="ri-map-pin-line"></i>
-                  </span>
-                  <p> Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000</p>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
-                  <span>
-                    <i className="ri-phone-line"></i>
-                  </span>
-                  <p>028 7300 5588</p>
-                </ListGroupItem>
-
-                <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
-                  <span>
-                    <i className="ri-mail-line"></i>
-                  </span>
-                  <p>efurniture@gmail.com</p>
-                </ListGroupItem>
-              </ListGroup>
-            </div>
-          </Col>
-
-          <Col lg="12">
-            <p className="footer__copyright">
-              Copyright {year} developed by Efurniture. @All rights reserved.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+        <div className="mt-8 text-center ">
+          <p className="text-gray-300">
+            Copyright {year} developed by Efurniture. @All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 };
 
 export default Footer;
+
