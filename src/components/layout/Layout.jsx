@@ -3,6 +3,7 @@ import React from 'react'
 import Header from "../header/Header";
 import HeaderBottom from "../header/HeaderBottom";
 import Footer from "../footer/Footer";
+import Routes from "../../routers/Routers"
 
 
 const Layout = () => {
@@ -10,6 +11,9 @@ const Layout = () => {
     <>
       <Header/>
       <HeaderBottom/>
+      <div>
+        <Routes/>
+      </div>
       <Footer/>
     </>
   )
