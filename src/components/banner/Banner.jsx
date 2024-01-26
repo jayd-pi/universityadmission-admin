@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
@@ -102,17 +103,17 @@ const Banner = () => {
   return (
     <div className="w-full bg-white">
       <Slider {...settings}>
-        <Link to="/offer">
+        <Link to="">
           <div>
             <Image imgSrc={bannerImgOne} />
           </div>
         </Link>
-        <Link to="/offer">
+        <Link to="">
           <div>
             <Image imgSrc={bannerImgTwo} />
           </div>
         </Link>
-        <Link to="/offer">
+        <Link to="">
           <div>
             <Image imgSrc={bannerImgThree} />
           </div>
