@@ -44,19 +44,19 @@ const Footer = () => {
 
             <div className="flex flex-col ml-1">
               <div className="mb-4">
-                <h4 className="text-xl font-semibold mb-4">Useful Links</h4>
+                <h4 className="text-xl font-semibold mb-4">Customer services</h4>
                 <ul>
                   <li className="mb-2">
-                    <Link to="/shop" className="text-gray-300 hover:text-white">Shop</Link>
+                    <Link className="text-gray-300 hover:text-white">Help center</Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/cart" className="text-gray-300 hover:text-white">Cart</Link>
+                    <Link className="text-gray-300 hover:text-white">Report abuse</Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
+                    <Link className="text-gray-300 hover:text-white">Privacy Policy</Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="#" className="text-gray-300 hover:text-white">Privacy Policy</Link>
+                    <Link to="#" className="text-gray-300 hover:text-white">Get paid for your feed back</Link>
                   </li>
                 </ul>
               </div>
