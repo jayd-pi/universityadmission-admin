@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Services from "../../services/Services"
 const BannerBottom = () => {
   return (
-    <div>BannerBottom</div>
+    <Services />
   )
 }
 
