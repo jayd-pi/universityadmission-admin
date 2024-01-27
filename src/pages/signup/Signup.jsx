@@ -3,8 +3,6 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = Yup.object({
   fullname: Yup.string().required("Full Name is required"),
@@ -176,7 +174,7 @@ const Signup = () => {
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                       style={{ right: "20px" }}
                       onClick={togglePassword}>
-                      {/* <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} /> */}
+                      {/* <span icon={showPassword ? FaEye : FaEyeSlash} /> */}
                     </span>
                   </div>
                   {formilk.touched.password && formilk.errors.password && (

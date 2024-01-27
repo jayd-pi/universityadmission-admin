@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import {
-  bannerImgOne,
+  bannerImg1,
   bannerImgTwo,
   bannerImgThree,
 } from "../../assets/images/index";
@@ -101,11 +101,11 @@ const Banner = () => {
     ],
   };
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-dark">
       <Slider {...settings}>
         <Link to="">
           <div>
-            <Image imgSrc={bannerImgOne} />
+            <Image imgSrc={bannerImg1} />
           </div>
         </Link>
         <Link to="">
