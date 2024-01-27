@@ -3,6 +3,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = Yup.object({
   fullname: Yup.string().required("Full Name is required"),
@@ -174,7 +176,7 @@ const Signup = () => {
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                       style={{ right: "20px" }}
                       onClick={togglePassword}>
-                      {/* <span icon={showPassword ? FaEye : FaEyeSlash} /> */}
+                      <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                     </span>
                   </div>
                   {formilk.touched.password && formilk.errors.password && (
@@ -244,7 +246,7 @@ const Signup = () => {
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Create an account
+                Sign Up
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
