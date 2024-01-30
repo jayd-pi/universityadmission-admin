@@ -5,6 +5,7 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
 import Contact from "../pages/contact/Contact";
+import About from "../pages/about/About";
 
 const Routers = () => {
   return (
@@ -14,6 +15,7 @@ const Routers = () => {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="contact" element={<Contact />} />
+      <Route path="about" element={<About />} />
     </Routes>
   );
 };
