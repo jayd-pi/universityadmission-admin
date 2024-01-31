@@ -5,8 +5,10 @@ import {
   saleImgOne,
   saleImgTwo,
   saleImgThree,
+  saleImgFive,
 } from "../../../assets/images/index";
 import Image from "../../designLayouts/Image";
+import { Button } from "reactstrap";
 
 const Sale = () => {
   return (
