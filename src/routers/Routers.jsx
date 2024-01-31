@@ -4,6 +4,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
+import Contact from "../pages/contact/Contact";
+import About from "../pages/about/About";
+import Booking from "../pages/booking/Booking";
+import Checkout from "../pages/checkout/Checkout";
 
 const Routers = () => {
   return (
@@ -12,6 +16,10 @@ const Routers = () => {
       <Route path="home" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="about" element={<About />} />
+      <Route path="booking" element={<Booking />} />
+      <Route path="checkout" element={<Checkout />} />
     </Routes>
   );
 };
