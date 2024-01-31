@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaUserCircle, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 import Flex from "../designLayouts/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import { paginationItems } from "../../constants/index";
@@ -100,7 +100,7 @@ const HeaderBottom = () => {
           </div>
           <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
             <div onClick={() => setShowUser(!showUser)} className="flex">
-              <FaUser />
+              <FaUserCircle />
               <FaCaretDown />
             </div>
             {showUser && (
