@@ -8,7 +8,7 @@ import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import Booking from "../pages/booking/Booking";
 import Checkout from "../pages/checkout/Checkout";
-
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 const Routers = () => {
   return (
     <Routes>
@@ -20,6 +20,8 @@ const Routers = () => {
       <Route path="about" element={<About />} />
       <Route path="booking" element={<Booking />} />
       <Route path="checkout" element={<Checkout />} />
+      <Route path="/product/:_id" element={<ProductDetails />}></Route>
+
     </Routes>
   );
 };
