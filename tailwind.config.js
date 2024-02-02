@@ -36,9 +36,17 @@ export default {
         },
         primeColor: "#262626",
         lightText: "#6D6D6D",
+        grayDark: "#373737",
+        primary: "#2F8DE4",
+        primaryDark: "#2471B8",
+        denied: "#DC3545",
+        grayLight: "#D6DDE8",
       },
       boxShadow: {
         testShadow: "0px 0px 54px -13px rgba(0,0,0,0.7)",
+      },
+      gridTemplateColumns: {
+        6733: "66fr 33fr",
       },
     },
   },
