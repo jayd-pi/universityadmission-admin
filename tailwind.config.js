@@ -37,7 +37,7 @@ export default {
         primeColor: "#262626",
         lightText: "#6D6D6D",
         grayDark: "#373737",
-        primary: "#2F8DE4",
+        primaryy: "#2F8DE4",
         primaryDark: "#2471B8",
         denied: "#DC3545",
         grayLight: "#D6DDE8",
