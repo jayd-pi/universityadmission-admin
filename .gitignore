@@ -13,7 +13,6 @@ dist-ssr
 *.local
 .env
 assets
-db.json
 
 # Editor directories and files
 .vscode/*

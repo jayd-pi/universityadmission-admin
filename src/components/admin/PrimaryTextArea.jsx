@@ -23,7 +23,7 @@ function PrimaryTextArea({
       <textarea
         {...props}
         onChange={onChange}
-        className={`mt-1 w-full h-full rounded-lg border px-4 py-3 smooth-transform border-grayLight outline-none focus:border-primary ${
+        className={`mt-1 w-full h-full rounded-lg border px-4 py-3 smooth-transform border-grayLight outline-none focus:border-primaryy ${
           grayMode
             ? "bg-[#F8F9FB] text-[#9A9A9C] border-[#DFE3E8] focus:border-[#DFE3E8]"
             : ""

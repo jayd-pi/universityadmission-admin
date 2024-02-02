@@ -1,12 +1,12 @@
 import {
-  spfOne,
-  spfTwo,
-  spfThree,
-  spfFour,
-  bestSellerOne,
-  bestSellerTwo,
-  bestSellerThree,
-  bestSellerFour,
+  spf01,
+  spf02,
+  spf03,
+  spf04,
+  armchair01,
+  armchair02,
+  doublesofa01,
+  table,
   newArrOne,
   newArrTwo,
   newArrThree,
@@ -33,7 +33,7 @@ export const navBarList = [
     {
       _id: 1004,
       title: "Contact",
-      link: "contact",
+      link: "/contact",
     },
     {
       _id: 1005,
@@ -45,7 +45,7 @@ export const navBarList = [
   export const paginationItems = [
     {
       _id: 1001,
-      img: spfOne,
+      img: spf01,
       productName: "Cap for Boys",
       price: "35.00",
       color: "Blank and White",
@@ -54,7 +54,7 @@ export const navBarList = [
     },
     {
       _id: 1002,
-      img: spfTwo,
+      img: spf02,
       productName: "Tea Table",
       price: "180.00",
       color: "Gray",
@@ -63,7 +63,7 @@ export const navBarList = [
     },
     {
       _id: 1003,
-      img: spfThree,
+      img: spf03,
       productName: "Headphones",
       price: "25.00",
       color: "Mixed",
@@ -72,7 +72,7 @@ export const navBarList = [
     },
     {
       _id: 1004,
-      img: spfFour,
+      img: spf04,
       productName: "Sun glasses",
       price: "220.00",
       color: "Black",
@@ -81,7 +81,7 @@ export const navBarList = [
     },
     {
       _id: 1005,
-      img: bestSellerOne,
+      img: armchair01,
       productName: "Flower Base",
       price: "35.00",
       color: "Blank and White",
@@ -90,7 +90,7 @@ export const navBarList = [
     },
     {
       _id: 1006,
-      img: bestSellerTwo,
+      img: armchair02,
       productName: "New Backpack",
       price: "180.00",
       color: "Gray",
@@ -99,7 +99,7 @@ export const navBarList = [
     },
     {
       _id: 1007,
-      img: bestSellerThree,
+      img: doublesofa01,
       productName: "Household materials",
       price: "25.00",
       color: "Mixed",
@@ -108,7 +108,7 @@ export const navBarList = [
     },
     {
       _id: 1008,
-      img: bestSellerFour,
+      img: table,
       productName: "Travel Bag",
       price: "220.00",
       color: "Black",
@@ -190,7 +190,7 @@ export const navBarList = [
     },
     {
       _id: 1017,
-      img: bestSellerFour,
+      img: table,
       productName: "Travel Bag",
       price: "220.00",
       color: "Black",
@@ -226,7 +226,7 @@ export const navBarList = [
     },
     {
       _id: 1021,
-      img: spfThree,
+      img: spf03,
       productName: "Headphones",
       price: "25.00",
       color: "Mixed",
@@ -235,7 +235,7 @@ export const navBarList = [
     },
     {
       _id: 1022,
-      img: spfFour,
+      img: spf04,
       productName: "Sun glasses",
       price: "220.00",
       color: "Black",
@@ -244,7 +244,7 @@ export const navBarList = [
     },
     {
       _id: 1023,
-      img: bestSellerOne,
+      img: armchair01,
       productName: "Flower Base",
       price: "35.00",
       color: "Blank and White",
@@ -253,7 +253,7 @@ export const navBarList = [
     },
     {
       _id: 1024,
-      img: spfOne,
+      img: spf01,
       productName: "Cap for Boys",
       price: "35.00",
       color: "Blank and White",
@@ -262,7 +262,7 @@ export const navBarList = [
     },
     {
       _id: 1025,
-      img: spfTwo,
+      img: spf02,
       productName: "Tea Table",
       price: "180.00",
       color: "Gray",
@@ -271,7 +271,7 @@ export const navBarList = [
     },
     {
       _id: 1026,
-      img: spfThree,
+      img: spf03,
       productName: "Headphones",
       price: "25.00",
       color: "Mixed",
@@ -280,7 +280,7 @@ export const navBarList = [
     },
     {
       _id: 1027,
-      img: spfFour,
+      img: spf04,
       productName: "Sun glasses",
       price: "220.00",
       color: "Black",
@@ -289,7 +289,7 @@ export const navBarList = [
     },
     {
       _id: 1028,
-      img: bestSellerOne,
+      img: armchair01,
       productName: "Flower Base",
       price: "35.00",
       color: "Blank and White",
@@ -298,7 +298,7 @@ export const navBarList = [
     },
     {
       _id: 1029,
-      img: bestSellerTwo,
+      img: armchair02,
       productName: "New Backpack",
       price: "180.00",
       color: "Gray",
@@ -307,7 +307,7 @@ export const navBarList = [
     },
     {
       _id: 1030,
-      img: bestSellerThree,
+      img: doublesofa01,
       productName: "Household materials",
       price: "25.00",
       color: "Mixed",
@@ -316,7 +316,7 @@ export const navBarList = [
     },
     {
       _id: 1031,
-      img: bestSellerFour,
+      img: table,
       productName: "Travel Bag",
       price: "220.00",
       color: "Black",
@@ -388,7 +388,7 @@ export const navBarList = [
     },
     {
       _id: 1039,
-      img: bestSellerFour,
+      img: table,
       productName: "Travel Bag",
       price: "220.00",
       color: "Black",
@@ -424,7 +424,7 @@ export const navBarList = [
     },
     {
       _id: 1043,
-      img: spfThree,
+      img: spf03,
       productName: "Headphones",
       price: "25.00",
       color: "Mixed",
@@ -433,7 +433,7 @@ export const navBarList = [
     },
     {
       _id: 1044,
-      img: spfFour,
+      img: spf04,
       productName: "Sun glasses",
       price: "220.00",
       color: "Black",
@@ -442,7 +442,7 @@ export const navBarList = [
     },
     {
       _id: 1045,
-      img: bestSellerOne,
+      img: armchair01,
       productName: "Flower Base",
       price: "35.00",
       color: "Blank and White",
@@ -451,7 +451,7 @@ export const navBarList = [
     },
     {
       _id: 1046,
-      img: spfOne,
+      img: spf01,
       productName: "Cap for Boys",
       price: "35.00",
       color: "Blank and White",

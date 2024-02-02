@@ -4,10 +4,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
-import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import Booking from "../pages/booking/Booking";
+import Contact from "../pages/contact/Contact";
+import Shop from "../pages/shop/Shop";
 import Checkout from "../pages/checkout/Checkout";
+import ProductDetails from "../pages/productDetails/ProductDetails";
 import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import ListProducts from "../components/admin/product/ListProducts";
@@ -46,10 +48,18 @@ const Routers = () => {
         }
       />
       <Route
-        path="contact"
+        path="shop"
         element={
           <MainLayout>
-            <Contact />
+            <Shop />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="product/:_id"
+        element={
+          <MainLayout>
+            <ProductDetails />
           </MainLayout>
         }
       />
@@ -58,6 +68,14 @@ const Routers = () => {
         element={
           <MainLayout>
             <About />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="contact"
+        element={
+          <MainLayout>
+            <Contact />
           </MainLayout>
         }
       />

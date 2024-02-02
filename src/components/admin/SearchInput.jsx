@@ -10,7 +10,7 @@ function SearchInput({ className = "", classNameSearchInput = "", ...props }) {
       <input
         {...props}
         type="text"
-        className={`w-full py-3 pl-10 pr-3 border rounded outline-none border-grayLight focus:border-primary hover:border-primary smooth-transform ${classNameSearchInput}`}
+        className={`w-full py-3 pl-10 pr-3 border rounded outline-none border-grayLight focus:border-primaryy hover:border-primaryy smooth-transform ${classNameSearchInput}`}
       />
     </div>
   );

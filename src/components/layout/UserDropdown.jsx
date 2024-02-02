@@ -93,7 +93,7 @@ export default UserDropdown;
 
 function DropDownItem({ label }) {
   return (
-    <p className="cursor-pointer smooth-animation whitespace-nowrap hover:text-primary">
+    <p className="cursor-pointer smooth-animation whitespace-nowrap hover:text-primaryy">
       {label}
     </p>
   );
