@@ -63,7 +63,7 @@ function PageBtn({ value, currentPage, setCurrentPage }) {
       onClick={() => (value === "..." ? null : setCurrentPage(value))}
       className={`flex items-center justify-center w-8 h-8 text-sm border rounded cursor-pointer ${
         isActive
-          ? "border-primary bg-primary text-white"
+          ? "border-primaryy bg-primaryy text-white"
           : "bg-white border-[#EFEAFA] text-[#4F4F4F]"
       }`}
     >

@@ -82,7 +82,7 @@ function MenuItem({ isActive = false, href = "/", label, icon, ...props }) {
       <div className={`${isActive ? "menu-icon-active" : ""}`}>{icon}</div>
       <p
         className={`text-sm text-center ${
-          isActive ? "text-primary" : "text-gray"
+          isActive ? "text-primaryy" : "text-gray"
         }`}
       >
         {label}

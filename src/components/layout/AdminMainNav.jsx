@@ -106,7 +106,7 @@ export function MenuItem({
       <div
         className={`flex items-center justify-between px-4 py-3 cursor-pointer menu-item hover:bg-[#2F8DE415] ${
           isActive
-            ? "bg-[#2F8DE415] text-primary icon-active"
+            ? "bg-[#2F8DE415] text-primaryy icon-active"
             : "bg-transparent text-[#4F4F4F]"
         }
         `}
@@ -152,7 +152,7 @@ function Item({ children, href = "", isActive = false }) {
       <div
         className={`flex items-center gap-2 menu-item py-3 smooth-transform pr-8 pl-12 ${
           isActive
-            ? "bg-[#2F8DE415] text-primary icon-active"
+            ? "bg-[#2F8DE415] text-primaryy icon-active"
             : "bg-transparent text-[#4F4F4F]"
         } hover:bg-[#2F8DE415]`}
       >

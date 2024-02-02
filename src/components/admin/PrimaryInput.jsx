@@ -30,7 +30,7 @@ function PrimaryInput({
           placeholder={placeholder}
           {...props}
           type={type}
-          className={`read-only:bg-readOnly w-full px-4 py-3 border rounded outline-none border-grayLight focus:border-primary hover:border-primary smooth-transform ${
+          className={`read-only:bg-readOnly w-full px-4 py-3 border rounded outline-none border-grayLight focus:border-primaryy hover:border-primaryy smooth-transform ${
             title ? "mt-2" : ""
           } ${classNameInput} ${accessoriesRight && "pr-11"}`}
         />
