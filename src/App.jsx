@@ -1,9 +1,11 @@
 import "./App.css";
+import "@reach/dialog/styles.css";
+import "./styles/table.css";
 
-import Layout from "./components/layout/Layout";
+import Routers from "./routers/Routers";
 
 function App() {
-  return <Layout />;
+  return <Routers />;
 }
 
 export default App;

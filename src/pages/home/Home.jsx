@@ -9,6 +9,7 @@ import SpecialOffers from "../../components/home/specialOffers/SpecialOffers";
 import Clock from "../../components/home/clock/Clock";
 
 const Home = () => {
+  const year = new Date().getFullYear();
   return (
     <div className='w-full mx-auto'>
       <Banner/>
@@ -21,7 +22,7 @@ const Home = () => {
       <Clock/>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

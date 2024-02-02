@@ -6,6 +6,7 @@ import {
   banner,
 } from "../../../assets/images/index";
 import Image from "../../designLayouts/Image";
+import { Button } from "reactstrap";
 
 const Sale = () => {
   return (
