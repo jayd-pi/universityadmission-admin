@@ -7,6 +7,7 @@ import Signup from "../pages/signup/Signup";
 import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import Booking from "../pages/booking/Booking";
+import Shop from "../pages/shop/Shop";
 import Checkout from "../pages/checkout/Checkout";
 import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
@@ -50,6 +51,14 @@ const Routers = () => {
         element={
           <MainLayout>
             <Contact />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="shop"
+        element={
+          <MainLayout>
+            <Shop />
           </MainLayout>
         }
       />
