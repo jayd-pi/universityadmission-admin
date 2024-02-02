@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    bannerImg1,
+    bannerImgOne1,
   } from "../../assets/images/index";
 import Image from "../../components/designLayouts/Image";
 const Checkout = () => {
@@ -43,7 +43,7 @@ const Checkout = () => {
                     <p className="text-gray-400">Check your items. And select a suitable shipping method.</p>
                     <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
                         <div className="flex flex-col rounded-lg bg-white sm:flex-row">
-                            <Image imgSrc={bannerImg1} className="m-2 h-24 w-28 rounded-md border object-cover object-center" />
+                            <Image imgSrc={bannerImgOne1} className="m-2 h-24 w-28 rounded-md border object-cover object-center" />
                             <div className="flex w-full flex-col px-4 py-4">
                                 <span className="font-semibold">Living room</span>
                                 <span className="float-right text-gray-400">42EU - 8.5US</span>
@@ -51,7 +51,7 @@ const Checkout = () => {
                             </div>
                         </div>
                         <div className="flex flex-col rounded-lg bg-white sm:flex-row">
-                            <Image imgSrc={bannerImg1} className="m-2 h-24 w-28 rounded-md border object-cover object-center" />
+                            <Image imgSrc={bannerImgOne1} className="m-2 h-24 w-28 rounded-md border object-cover object-center" />
                             <div className="flex w-full flex-col px-4 py-4">
                                 <span className="font-semibold">Living room</span>
                                 <span className="float-right text-gray-400">42EU - 8.5US</span>
