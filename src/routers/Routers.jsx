@@ -4,9 +4,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
-import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import Booking from "../pages/booking/Booking";
+import Contact from "../pages/contact/Contact";
 import Shop from "../pages/shop/Shop";
 import Checkout from "../pages/checkout/Checkout";
 import ProductDetails from "../pages/productDetails/ProductDetails";
@@ -48,14 +48,6 @@ const Routers = () => {
         }
       />
       <Route
-        path="contact"
-        element={
-          <MainLayout>
-            <Contact />
-          </MainLayout>
-        }
-      />
-      <Route
         path="shop"
         element={
           <MainLayout>
@@ -76,6 +68,14 @@ const Routers = () => {
         element={
           <MainLayout>
             <About />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="contact"
+        element={
+          <MainLayout>
+            <Contact />
           </MainLayout>
         }
       />
