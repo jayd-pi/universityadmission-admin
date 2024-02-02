@@ -9,6 +9,7 @@ import About from "../pages/about/About";
 import Booking from "../pages/booking/Booking";
 import Shop from "../pages/shop/Shop";
 import Checkout from "../pages/checkout/Checkout";
+import ProductDetails from "../pages/productDetails/ProductDetails";
 import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import ListProducts from "../components/admin/product/ListProducts";
@@ -59,6 +60,14 @@ const Routers = () => {
         element={
           <MainLayout>
             <Shop />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="product/:_id"
+        element={
+          <MainLayout>
+            <ProductDetails />
           </MainLayout>
         }
       />
