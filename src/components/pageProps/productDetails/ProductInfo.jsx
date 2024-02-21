@@ -3,8 +3,40 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { productSlice } from "../../../redux/slice/productSlice";
 
+import { addToCart } from "../../../redux/slice/productSlice";
+
+
+import { cartActions } from "../../../redux/slice/cartSlice";
+import { toast, ToastContainer } from 'react-toastify'
+
 const ProductInfo = ({ productInfo }) => {
   const dispatch = useDispatch();
+
+  const addToCart =()=> {
+    dispatch(cartActions.addItem({
+      id: productInfo._id,
+      productName: productInfo.productName,
+      quantity: 1,
+      img: productInfo.img,
+      badge: productInfo.badge,
+      price: productInfo.price,
+      colors: productInfo.color,
+    }))
+
+    toast.success('Product added successfully', {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  
+
+
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-4xl font-semibold">{productInfo.productName}</h2>
@@ -15,19 +47,7 @@ const ProductInfo = ({ productInfo }) => {
         <span className="font-normal">Colors:</span> {productInfo.color}
       </p>
       <button
-        onClick={() =>
-          dispatch(
-            productSlice({
-              _id: productInfo.id,
-              name: productInfo.productName,
-              quantity: 1,
-              image: productInfo.img,
-              badge: productInfo.badge,
-              price: productInfo.price,
-              colors: productInfo.color,
-            })
-          )
-        }
+        onClick={addToCart}
         className="w-full py-4 bg-primeColor hover:bg-black duration-300 text-white text-lg font-titleFont"
       >
         Add to Cart

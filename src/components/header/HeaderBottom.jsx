@@ -6,6 +6,8 @@ import Flex from "../designLayouts/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import { paginationItems } from "../../constants/index";
 
+import { useSelector } from "react-redux";
+
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
@@ -35,6 +37,9 @@ const HeaderBottom = () => {
     );
     setFilteredProducts(filtered);
   }, [searchQuery]);
+
+
+  const totalQuantity = useSelector(state => state.cart.totalQuantity)
 
   return (
     <div className="w-full bg-[#F5F5F3] relative">
@@ -132,6 +137,7 @@ const HeaderBottom = () => {
               <div className="relative">
                 <FaShoppingCart />
                 <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
+                  {totalQuantity}
                 </span>
               </div>
             </Link>
