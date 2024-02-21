@@ -22,7 +22,7 @@ const cartSlice = createSlice({
         state.cartItems.push({
           id: newItem.id,
           productName: newItem.productName,
-          imgUrl: newItem.imgUrl,
+          img: newItem.img,
           price: newItem.price,
           quantity: 1,
           totalPrice: newItem.price,
@@ -37,6 +37,10 @@ const cartSlice = createSlice({
         (total, item) => total + Number(item.price) * Number(item.quantity),
         0
       );
+
+      console.log(state.totalAmount)
+      console.log(state.cartItems)
+      console.log(newItem)
     },
 
     deleteItem: (state, action) => {

@@ -18,6 +18,8 @@ import CreateNewProduct from "../components/admin/product/CreateNewProduct";
 import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
 
+import Cart from "../pages/cart/Cart";
+
 const Routers = () => {
   return (
     <Routes>
@@ -119,6 +121,7 @@ const Routers = () => {
           </AdminLayout>
         }
       />
+
       <Route
         path="admin/products/create"
         element={
@@ -141,6 +144,15 @@ const Routers = () => {
           <AdminLayout>
             <EditProductDetail />
           </AdminLayout>
+        }
+      />
+
+      <Route
+        path="cart"
+        element={
+          <MainLayout>
+            <Cart />
+          </MainLayout>
         }
       />
     </Routes>
