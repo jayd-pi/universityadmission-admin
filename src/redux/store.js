@@ -1,12 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import productSlice from "./slice/productSlice";
@@ -24,11 +18,9 @@ const store = configureStore({
   reducer: { productSlice: persistedReducer, cart: cartSlice },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }),
 });
 
-
 export default store;
+
