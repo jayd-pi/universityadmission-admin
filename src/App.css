@@ -4,7 +4,9 @@
 @tailwind utilities;
 
 /*  css variables */
-
+.Toastify__close-button {
+    width: auto;
+}
 .menu-item:hover p {
   color: #2f8de4;
 }

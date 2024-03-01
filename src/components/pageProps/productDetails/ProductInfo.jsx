@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { productSlice } from "../../../redux/slice/productSlice";
 
 import { addToCart } from "../../../redux/slice/productSlice";
-
+import AuthService from "../../../api/user.service";
 
 import { cartActions } from "../../../redux/slice/cartSlice";
 import { toast, ToastContainer } from 'react-toastify'
@@ -13,30 +13,41 @@ const ProductInfo = ({ productInfo }) => {
   const dispatch = useDispatch();
 
   const addToCart =()=> {
-    dispatch(cartActions.addItem({
-      id: productInfo._id,
-      productName: productInfo.productName,
-      quantity: 1,
-      img: productInfo.img,
-      badge: productInfo.badge,
-      price: productInfo.price,
-      colors: productInfo.color,
-    }))
-
-    toast.success('Product added successfully', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    // dispatch(cartActions.addItem({
+    //   id: productInfo._id,
+    //   productName: productInfo.productName,
+    //   quantity: 1,
+    //   img: productInfo.img,
+    //   badge: productInfo.badge,
+    //   price: productInfo.price,
+    //   colors: productInfo.color,
+    // }))
+        AuthService.addToCart({
+          cart: [
+            {
+              _id: productInfo._id,
+              count: 1,
+              color: productInfo.color,
+            },
+          ],
+        }).then((data) => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+                toast.success("Product added successfully", {
+                  // position: "bottom-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+          }
+        });
   };
   
-
-
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-4xl font-semibold">{productInfo.productName}</h2>
