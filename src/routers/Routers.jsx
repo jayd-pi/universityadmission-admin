@@ -19,6 +19,9 @@ import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
 
 import Cart from "../pages/cart/Cart";
+import Wishlist from "../pages/home/Wishlist";
+import Order from "../pages/cart/Order";
+import EditProfile from "../pages/login/EditProfile";
 
 const Routers = () => {
   return (
@@ -152,6 +155,30 @@ const Routers = () => {
         element={
           <MainLayout>
             <Cart />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="wishlist"
+        element={
+          <MainLayout>
+            <Wishlist />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="order"
+        element={
+          <MainLayout>
+            <Order />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="editProfile"
+        element={
+          <MainLayout>
+            <EditProfile />
           </MainLayout>
         }
       />
