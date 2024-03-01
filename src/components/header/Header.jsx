@@ -8,6 +8,7 @@ import { logom } from "../../assets/images/index";
 import Image from "../designLayouts/Image";
 import { navBarList } from "../../constants/index";
 import Flex from "../designLayouts/Flex";
+import { useIsLogin } from "../../hooks/useIsLogin";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
@@ -15,6 +16,7 @@ const Header = () => {
   const [category, setCategory] = useState(false);
   const [brand, setBrand] = useState(false);
   const location = useLocation();
+  const { isLogin } = useIsLogin();
   useEffect(() => {
     let ResponsiveMenu = () => {
       if (window.innerWidth < 667) {
