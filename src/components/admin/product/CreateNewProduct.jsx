@@ -30,15 +30,15 @@ function CreateNewProduct() {
     images: "",
   };
   const validationSchema = Yup.object({
-    title: Yup.string().required("Email is required"),
-    price: Yup.string().required("Email is required"),
-    quantity: Yup.string().required("Email is required"),
-    color: Yup.string().required("Email is required"),
-    brand: Yup.string().required("Email is required"),
-    category: Yup.string().required("Email is required"),
+    title: Yup.string().required("Title is required"),
+    price: Yup.number().moreThan(0, "Price must be greater than or equal to 0").required("Price is required"),
+    quantity: Yup.number().moreThan(0, "Quantity must be greater than or equal to 0").required("Quantity is required"),
+    color: Yup.string().required("Color is required"),
+    brand: Yup.string().required("Brand is required"),
+    category: Yup.string().required("Category is required"),
     description: Yup.string()
-      .min(4, "Password must be at least 4 characters")
-      .required("Password is required"),
+      .min(4, "Description must be at least 4 characters")
+      .required("Description is required"),
   });
 
   const handleLogin = (formValue) => {

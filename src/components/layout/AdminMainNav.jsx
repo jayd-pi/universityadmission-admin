@@ -21,7 +21,7 @@ function AdminMainNav() {
         location.pathname.includes("/admin/dashboard"),
     },
     {
-      id: 3,
+      id: 2,
       name: "Products",
       icon: <CollectionIcon />,
       href: "/admin/products",
@@ -29,6 +29,15 @@ function AdminMainNav() {
         location.pathname.includes("/admin/products") ||
         location.pathname.includes("/admin/products"),
       // subMenu: subMenuCollections,
+    },
+    {
+      id: 3,
+      name: "Vouchers",
+      icon: <CollectionIcon />,
+      href: "/admin/vouchers",
+      isActive:
+        location.pathname.includes("/admin/vouchers") ||
+        location.pathname.includes("/admin/vouchers"),
     },
   ];
 

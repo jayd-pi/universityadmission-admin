@@ -13,11 +13,14 @@ import ProductDetails from "../pages/productDetails/ProductDetails";
 import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import ListProducts from "../components/admin/product/ListProducts";
+import ListVouchers from "../components/admin/voucher/ListVouchers";
 import AdminDashboard from "../components/admin/dashboard/AdminDashboard";
 import CreateNewProduct from "../components/admin/product/CreateNewProduct";
 import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
-
+import CreateNewVoucher from "../components/admin/voucher/CreateNewVoucher";
+import ViewVoucherDetail from "../components/admin/voucher/ViewVoucherDetail";
+import EditVoucherDetail from "../components/admin/voucher/EditVoucherDetail";
 import Cart from "../pages/cart/Cart";
 import Wishlist from "../pages/home/Wishlist";
 import Order from "../pages/cart/Order";
@@ -146,6 +149,38 @@ const Routers = () => {
         element={
           <AdminLayout>
             <EditProductDetail />
+          </AdminLayout>
+        }
+      />
+        <Route
+        path="admin/vouchers"
+        element={
+          <AdminLayout>
+            <ListVouchers/>
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/vouchers/create"
+        element={
+          <AdminLayout>
+            <CreateNewVoucher />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/vouchers/:id"
+        element={
+          <AdminLayout>
+            <ViewVoucherDetail />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/vouchers/:id/edit"
+        element={
+          <AdminLayout>
+            <EditVoucherDetail />
           </AdminLayout>
         }
       />

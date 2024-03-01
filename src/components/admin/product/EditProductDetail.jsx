@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AuthService from "../../../api/product.service";
 import { storeImageToFireBase } from "../../../lib/storeImageToFirebase";
 import { toast } from "react-toastify";
-function EditProductDetail() {
+function EditVoucherDetail() {
   let navigate = useNavigate();
   const { id } = useParams();
   const [newProduct, setNewProduct] = useState(false);
@@ -393,4 +393,4 @@ function EditProductDetail() {
   );
 }
 
-export default EditProductDetail;
+export default EditVoucherDetail;
