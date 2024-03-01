@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { toast } from "react-toastify";
+import { useIsLogin } from "../../hooks/useIsLogin";
 const validationSchema = Yup.object({
   firstname: Yup.string().required("first name is required"),
   lastname: Yup.string().required("last name is required"),
   mobile: Yup.string().required("mobile is required"),
-  address: Yup.string().required("address is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -26,20 +26,17 @@ const validationSchema = Yup.object({
     .required("Confirm Password is required"),
 });
 
-const Signup = () => {
+const EditProfile = () => {
   const navigate = useNavigate();
-
+ const { isLogin } = useIsLogin();
   const [showPassword, setShowPassword] = useState(false);
 
   const formilk = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
-      address: "",
-      mobile: "",
-      birthday: "",
-      gender: "",
+      firstname: isLogin.firstname,
+      lastname: isLogin.lastname,
+      email: isLogin.email,
+      mobile: isLogin.mobile,
       password: "",
     },
     validationSchema: validationSchema,
@@ -47,19 +44,38 @@ const Signup = () => {
       try {
         delete values.terms;
         delete values.confirmPassword;
-        const response = await axios.post(
-          "http://localhost:8000/api/v1/auth/register",
-          values
+        const response = await axios.put(
+          "http://localhost:8000/api/v1/auth/edit-user",
+          values,
+          { headers: { Authorization: "Bearer " + isLogin.token } }
         );
         if (response.data) {
-          navigate("/login");
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              ...isLogin,
+              firstname: values.firstname,
+              lastname: values.lastname,
+            })
+          );
+          toast.success("edit profile successfully", {
+            // position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          navigate("/home");
         }
-        // const token = response.data.token;
-        // localStorage.setItem('token', token);
       } catch (error) {
         alert(error.message);
-        console.error("Register failed:", error.response.data);
+        console.error("edit failed:", error.response.data);
       }
+        console.log("🚀 ~ onSubmit: ~ values:", values)
+        console.log("🚀 ~ onSubmit: ~ values:", values)
     },
   });
 
@@ -73,7 +89,7 @@ const Signup = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
-              Create an account
+              Edit Profile
             </h1>
             <form
               className="space-y-4 md:space-y-6"
@@ -94,7 +110,7 @@ const Signup = () => {
                     value={formilk.values.firstname}
                     onChange={formilk.handleChange}
                     onBlur={formilk.handleBlur}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                    className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                       formilk.touched.firstname && formilk.errors.firstname
                         ? "border-red-500"
                         : ""
@@ -122,7 +138,7 @@ const Signup = () => {
                     value={formilk.values.lastname}
                     onChange={formilk.handleChange}
                     onBlur={formilk.handleBlur}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                    className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                       formilk.touched.lastname && formilk.errors.lastname
                         ? "border-red-500"
                         : " "
@@ -152,7 +168,7 @@ const Signup = () => {
                   value={formilk.values.email}
                   onChange={formilk.handleChange}
                   onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                  className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                     formilk.touched.email && formilk.errors.email
                       ? "border-red-500"
                       : ""
@@ -180,7 +196,7 @@ const Signup = () => {
                   value={formilk.values.mobile}
                   onChange={formilk.handleChange}
                   onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                  className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                     formilk.touched.mobile && formilk.errors.mobile
                       ? "border-red-500"
                       : ""
@@ -191,75 +207,6 @@ const Signup = () => {
                 {formilk.touched.mobile && formilk.errors.mobile && (
                   <div className="text-red-500 text-sm">
                     {formilk.errors.mobile}
-                  </div>
-                )}
-              </div>
-              <div className="flex space-x-4">
-                <div className="flex-1 relative">
-                  <label
-                    htmlFor="gender"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Gender
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    value={formilk.values.gender}
-                    onChange={formilk.handleChange}
-                    onBlur={formilk.handleBlur}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="other">Other</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-                <div className="flex-1 relative">
-                  <label
-                    htmlFor="birthday"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Birthday
-                  </label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formilk.values.birthday}
-                    onChange={formilk.handleChange}
-                    onBlur={formilk.handleBlur}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="address"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
-                >
-                  Address
-                </label>
-                <input
-                  type="text"
-                  name="address"
-                  id="address"
-                  value={formilk.values.address}
-                  onChange={formilk.handleChange}
-                  onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                    formilk.touched.address && formilk.errors.address
-                      ? "border-red-500"
-                      : ""
-                  }`}
-                  placeholder="123 Main Street, Cityville"
-                  required=""
-                />
-                {formilk.touched.address && formilk.errors.address && (
-                  <div className="text-red-500 text-sm">
-                    {formilk.errors.address}
                   </div>
                 )}
               </div>
@@ -280,7 +227,7 @@ const Signup = () => {
                       onBlur={formilk.handleBlur}
                       onChange={formilk.handleChange}
                       placeholder="••••••••"
-                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                      className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                         formilk.touched.password && formilk.errors.password
                           ? "border-red-500"
                           : " "
@@ -320,7 +267,7 @@ const Signup = () => {
                       onBlur={formilk.handleBlur}
                       onChange={formilk.handleChange}
                       placeholder="••••••••"
-                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                      className={`bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                         formilk.touched.confirmPassword &&
                         formilk.errors.confirmPassword
                           ? "border-red-500"
@@ -384,4 +331,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default EditProfile;
