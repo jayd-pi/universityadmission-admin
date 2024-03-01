@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/slice/productSlice";
 import { cartActions } from "../../../redux/slice/cartSlice";
 import { toast, ToastContainer } from 'react-toastify'
+import authService from "../../../api/user.service";
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -30,27 +31,84 @@ const Product = (props) => {
       },
     });
   };
+  const addToCart = () => {
+    // dispatch(cartActions.addItem({
+    //   id: productInfo._id,
+    //   productName: productInfo.productName,
+    //   quantity: 1,
+    //   img: productInfo.img,
+    //   badge: productInfo.badge,
+    //   price: productInfo.price,
+    //   colors: productInfo.color,
+    // }))
+    authService
+      .addToCart({
+        cart: [
+          {
+            _id: props._id,
+            count: 1,
+            color: props.color,
+          },
+        ],
+      })
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          toast.success("Product added successfully", {
+            // position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      });
+  };
+  // const addToCart =()=> {
+  //   dispatch(cartActions.addItem({
+  //     id: props._id,
+  //     img: props.img,
+  //     productName: props.productName,
+  //     price: props.price,
+  //   }))
 
-  const addToCart =()=> {
-    dispatch(cartActions.addItem({
-      id: props._id,
-      img: props.img,
-      productName: props.productName,
-      price: props.price,
-    }))
-
-    toast.success('Product added successfully', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  }
-
+  //   toast.success('Product added successfully', {
+  //     position: "bottom-right",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: false,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // }
+  const addToWishlist = () => {
+    authService
+      .addToWishlist({
+        prodId: props._id,
+      })
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          toast.success("Wishlist added successfully", {
+            // position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      });
+  };
 
 
   return (
@@ -71,7 +129,7 @@ const Product = (props) => {
               </span>
             </li>
             <li
-              onClick={addToCart}
+              onClick={() => addToCart()}
               className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               Add to Cart
@@ -88,7 +146,10 @@ const Product = (props) => {
                 <MdOutlineLabelImportant />
               </span>
             </li>
-            <li className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
+            <li
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+              onClick={() => addToWishlist()}
+            >
               Add to Wish List
               <span>
                 <BsSuitHeartFill />

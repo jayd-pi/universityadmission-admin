@@ -1,17 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Heading from "../products/Heading";
 import Product from "../products/Product";
-import {
-  newArrOne,
-  newArrTwo,
-  newArrThree,
-  newArrFour,
-} from "../../../assets/images/index";
+// import {
+//   newArrOne,
+//   newArrTwo,
+//   newArrThree,
+//   newArrFour,
+// } from "../../../assets/images/index";
 import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
-
+import authService from "../../../api/product.service";
 const NewArrivals = () => {
   const settings = {
     infinite: true,
@@ -47,11 +47,34 @@ const NewArrivals = () => {
       },
     ],
   };
+      const [listProducts, setListProducts] = useState([]);
+      useEffect(() => {
+        authService.getProduct().then((data) => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            setListProducts(data.data);
+          }
+        });
+      }, []);
   return (
     <div className="w-full pb-16">
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
-        <div className="px-2">
+        {listProducts.map((product, index) => (
+          <div className="px-2" key={index}>
+            <Product
+              _id={product._id}
+              img={product.images}
+              productName={product.title}
+              price={product.price}
+              color={product.color}
+              badge={true}
+              des={product.description}
+            />
+          </div>
+        ))}
+        {/* <div className="px-2">
           <Product
             _id="100001"
             img={newArrOne}
@@ -105,7 +128,7 @@ const NewArrivals = () => {
             badge={false}
             des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
           />
-        </div>
+        </div> */}
       </Slider>
     </div>
   );
