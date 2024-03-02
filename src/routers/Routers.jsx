@@ -19,7 +19,6 @@ import CreateNewProduct from "../components/admin/product/CreateNewProduct";
 import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
 import CreateNewVoucher from "../components/admin/voucher/CreateNewVoucher";
-import ViewVoucherDetail from "../components/admin/voucher/ViewVoucherDetail";
 import EditVoucherDetail from "../components/admin/voucher/EditVoucherDetail";
 import Cart from "../pages/cart/Cart";
 import Wishlist from "../pages/home/Wishlist";
@@ -165,14 +164,6 @@ const Routers = () => {
         element={
           <AdminLayout>
             <CreateNewVoucher />
-          </AdminLayout>
-        }
-      />
-      <Route
-        path="admin/vouchers/:id"
-        element={
-          <AdminLayout>
-            <ViewVoucherDetail />
           </AdminLayout>
         }
       />

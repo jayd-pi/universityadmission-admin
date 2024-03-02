@@ -32,9 +32,9 @@ function EditVoucherDetail() {
     fetchData(); // Gọi hàm fetchData để thực hiện việc gọi API
   }, [id]); // Đảm bảo useEffect được gọi lại khi id thay đổi
   const initialValues = {
-    name: newVoucher?.title || "",
+    name: newVoucher?.name || "",
     discount: newVoucher?.discount || 1,
-    expiry: newVoucher?.expiry
+    expiry: newVoucher?.expiry || ""
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
@@ -114,7 +114,7 @@ function EditVoucherDetail() {
       <HeaderCreate
         homeUrl="/admin/vouchers"
         btnSaveTitle="update Voucher"
-        btnSaveType={SAVE_TYPE.CREATE}
+        // btnSaveType={SAVE_TYPE.UPDATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}
         className="mb-5"
