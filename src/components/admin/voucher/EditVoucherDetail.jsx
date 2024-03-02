@@ -114,7 +114,7 @@ function EditVoucherDetail() {
       <HeaderCreate
         homeUrl="/admin/vouchers"
         btnSaveTitle="update Voucher"
-        // btnSaveType={SAVE_TYPE.UPDATE}
+        btnSaveType={SAVE_TYPE.UPDATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}
         className="mb-5"

@@ -18,7 +18,7 @@ function HeaderCreate({
   return (
     <div className={className}>
       <div className="flex flex-col justify-between gap-5 mb-5 md:items-center md:flex-row">
-        <Title>Create New {btnSaveTitle}</Title>
+        <Title>{btnSaveTitle}</Title>
         <div className="flex justify-around gap-5 md:justify-end">
           <Link to={homeUrl}>
             <SecondaryBtn className="min-w-[140px]">Cancel</SecondaryBtn>
