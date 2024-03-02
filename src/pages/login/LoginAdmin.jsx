@@ -25,8 +25,8 @@ const LogIn = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string()
-      .min(5, "Email must be at least 5 characters")
-      .required("Email is required"),
+      .min(5, "Username must be at least 5 characters")
+      .required("Username is required"),
     password: Yup.string()
       .min(4, "Password must be at least 4 characters")
       .required("Password is required"),
@@ -40,7 +40,6 @@ const LogIn = () => {
       .unwrap()
       .then(() => {
         navigate("/admin");
-        // window.location.reload();
       })
       .catch(() => {
         setLoading(false);

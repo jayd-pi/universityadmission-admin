@@ -11,11 +11,19 @@ import GainDashboardIcon from "../../icons/GainDashboardIcon";
 import SpentDashboardIcon from "../../icons/SpentDashboardIcon";
 import InfoDashboardCard from "./InfoDashboardCard";
 import UserDashboardIcon from "../../icons/UserDashboardIcon";
+import { useIsLogin } from "../../../hooks/useIsLogin";
+import { Navigate, useNavigate } from "react-router-dom"
 
 function AdminDashboard() {
   const listProducts = {
     data: [{ id: 1, productName: "Cat" }],
   };
+  const navigate = useNavigate();
+  const { isAdmin } = useIsLogin();
+  if (!isAdmin) {
+    console.log(!isAdmin);
+    return <Navigate to="/home" />
+  }
   return (
     <div>
       <Title>Dashboards</Title>
