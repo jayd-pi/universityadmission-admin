@@ -84,9 +84,9 @@ function ListProducts() {
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                <Link to={`/admin/products/${data?.id}`}>
+                {/* <Link to={`/admin/products/${data?.id}`}>
                   <ShowDetail />
-                </Link>
+                </Link> */}
                 <Link className="" to={`/admin/products/${data?._id}/edit`}>
                   <EditButton />
                 </Link>

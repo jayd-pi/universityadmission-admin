@@ -21,14 +21,14 @@ function HeaderCreate({
         <Title>{btnSaveTitle}</Title>
         <div className="flex justify-around gap-5 md:justify-end">
           <Link to={homeUrl}>
-            <SecondaryBtn className="min-w-[140px]">Cancel</SecondaryBtn>
+            <SecondaryBtn className="mb-0 min-w-[140px]">Cancel</SecondaryBtn>
           </Link>
           <ConfirmSavePopup
             type={btnSaveType}
             title={btnSaveTitle}
             handleConfirmUpdate={handleClickSaveCreate}
           >
-            <PrimaryBtn className="min-w-[140px]" disabled={disabledBtn}>
+            <PrimaryBtn className="mt-4 min-w-[140px]" disabled={disabledBtn}>
               Save
             </PrimaryBtn>
           </ConfirmSavePopup>

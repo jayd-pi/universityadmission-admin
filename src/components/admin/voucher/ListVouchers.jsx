@@ -94,7 +94,7 @@ function ListVouchers() {
   return (
     <div>
       <Title >List Voucher</Title>
-      <div className="flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
+      <div className="flex flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
         <SearchInput
           placeholder="Search by name"
           onChange={(e) => setSearchParam(e.target.value)}

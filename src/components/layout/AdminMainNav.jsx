@@ -39,6 +39,15 @@ function AdminMainNav() {
         location.pathname.includes("/admin/vouchers") ||
         location.pathname.includes("/admin/vouchers"),
     },
+    {
+      id: 4,
+      name: "Account",
+      icon: <CollectionIcon />,
+      href: "/admin/account",
+      isActive:
+        location.pathname.includes("/admin/account") ||
+        location.pathname.includes("/admin/account"),
+    },
   ];
 
   return (
