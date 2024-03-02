@@ -56,6 +56,9 @@ const emptyCart = () => {
     headers: authHeader(),
   });
 };
+const updateCart = () => {
+  return axios.get(API_URL + "updatecart", { headers: authHeader() });
+};
 export default {
   getPublicContent,
   getUserBoard,
@@ -70,4 +73,5 @@ export default {
   postOrder,
   emptyCart,
   getOrder,
+  updateCart
 };
