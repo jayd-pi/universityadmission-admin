@@ -16,7 +16,6 @@ function CreateNewVoucher() {
   const [image, setImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const handleCreateNewVoucher = () => {
-    // handle action create product
   };
   const initialValues = {
     name: "",
