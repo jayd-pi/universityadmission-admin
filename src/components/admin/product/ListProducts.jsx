@@ -56,23 +56,23 @@ function ListProducts() {
       Header: " ",
       columns: [
         {
-          Header: "Title",
+          Header: "Name",
           accessor: (data) => <p>{data?.title}</p>,
         },
         {
-          Header: "price",
+          Header: "Price (%)",
           accessor: (data) => <p>{data?.price}</p>,
         },
         {
-          Header: "color",
+          Header: "Color",
           accessor: (data) => <p>{data?.color}</p>,
         },
         {
-          Header: "brand",
+          Header: "Brand",
           accessor: (data) => <p>{data?.brand}</p>,
         },
         {
-          Header: "category",
+          Header: "Category",
           accessor: (data) => <p>{data?.category}</p>,
         },
         {

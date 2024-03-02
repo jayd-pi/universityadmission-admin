@@ -72,9 +72,9 @@ function ListVouchers() {
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                <Link to={`/admin/vouchers/${data?.id}`}>
+                {/* <Link to={`/admin/vouchers/${data?.id}`}>
                   <ShowDetail />
-                </Link>
+                </Link> */}
                 <Link className="" to={`/admin/vouchers/${data?._id}/edit`}>
                   <EditButton />
                 </Link>
