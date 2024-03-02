@@ -11,7 +11,7 @@ const Order = () => {
       if (data.error) {
         console.log(data.error);
       } else {
-         console.log(data.data);
+        console.log(data.data);
         setListCart(data.data);
       }
     });
@@ -36,6 +36,16 @@ const Order = () => {
         <td>${item.paymentIntent.amount}</td>
         <td>{item.paymentIntent.currency}</td>
         <td>{item.orderStatus}</td>
+        <td>
+          {item.products.map((product, index) => (
+            <img
+              key={index}
+              src={product.image} // Assuming 'image' is the property containing the image URL
+              alt={`Product ${index + 1}`}
+              style={{ maxWidth: "100px", maxHeight: "100px" }} // Adjust dimensions as needed
+            />
+          ))}
+        </td>
       </tr>
     );
   };
@@ -55,6 +65,7 @@ const Order = () => {
                       <th>Price</th>
                       <th>currency</th>
                       <th>orderStatus</th>
+                      <th>Image</th>
                     </tr>
                   </thead>
 
