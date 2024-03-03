@@ -39,7 +39,7 @@ const HeaderBottom = () => {
     }, []);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log("🚀 ~ HeaderBottom ~ filteredProducts:", filteredProducts)
+  // console.log("🚀 ~ HeaderBottom ~ filteredProducts:", filteredProducts)
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   const handleSearch = (e) => {

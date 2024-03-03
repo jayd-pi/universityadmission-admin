@@ -17,8 +17,8 @@ import authService from "../../../api/user.service";
 const Product = (props) => {
   const dispatch = useDispatch();
   const _id = props.productName;
-  const idString = (_id) => {
-    return String(_id).toLowerCase().split(" ").join("");
+  const idString = (id) => {
+    return String(id).toLowerCase().split(" ").join("");
   };
   const rootId = idString(_id);
 
@@ -45,7 +45,7 @@ const Product = (props) => {
       .addToCart({
         cart: [
           {
-            _id: props._id,
+            _id: props.id,
             count: 1,
             color: props.color,
           },
