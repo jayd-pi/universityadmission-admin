@@ -48,7 +48,7 @@ const Signup = () => {
         delete values.terms;
         delete values.confirmPassword;
         const response = await axios.post(
-          "http://localhost:8000/api/v1/auth/register",
+          "http://localhost:8080/api/v1/auth/register",
           values
         );
         if (response.data) {

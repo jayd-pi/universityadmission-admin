@@ -45,7 +45,7 @@ const EditProfile = () => {
         delete values.terms;
         delete values.confirmPassword;
         const response = await axios.put(
-          "http://localhost:8000/api/v1/auth/edit-user",
+          "http://localhost:8080/api/v1/auth/edit-user",
           values,
           { headers: { Authorization: "Bearer " + isLogin.token } }
         );

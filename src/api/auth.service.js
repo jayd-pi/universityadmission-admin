@@ -12,7 +12,7 @@ const register = (username, email, password) => {
 
 const login = (ad,username, password) => {
   return axios
-    .post(`${API_URL}${ad ? "admin-login" : "login"}`, {
+    .post(`${API_URL}${ad ? "admin-login" : "authenticate"}`, {
       email: username,
       password,
     })
