@@ -10,20 +10,20 @@ const register = (username, email, password) => {
   });
 };
 
-const login = (ad,username, password) => {
+const login = (email, password) => {
   return axios
-    .post(`${API_URL}${ad ? "admin-login" : "authenticate"}`, {
-      email: username,
+    .post(`${API_URL}${"authenticate"}`, {
+      email,
       password,
     })
     .then((response) => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
-
       return response.data;
     });
 };
+
 const loginGoogle = (accessToken) => {
   return axios
     .post(`${API_URL}${"login"}`, )

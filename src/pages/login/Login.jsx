@@ -16,7 +16,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
-  const {search }= useLocation();
+  const { search } = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,12 +24,12 @@ const LogIn = () => {
   }, [dispatch]);
 
   const initialValues = {
-    username: "",
+    email: "",
     password: "",
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string()
+    email: Yup.string()
       .min(5, "Email must be at least 5 characters")
       .required("Email is required"),
     password: Yup.string()
@@ -41,7 +41,7 @@ const LogIn = () => {
     const providerGoogle = new GoogleAuthProvider();
     signInWithPopup(auth, providerGoogle)
       .then(function (result) {
-        console.log("🚀 ~ result:", result)
+        // console.log("🚀 ~ result:", result)
         // signInMail(result.user.accessToken).then((data) => {
         //   if (data.error) {
         //     console.log(data.error);
@@ -57,22 +57,29 @@ const LogIn = () => {
       });
   };
   const handleLogin = (formValue) => {
-    const { username, password } = formValue;
-    setLoading(true);
+    const { email, password } = formValue;
+    setLoading(false);
 
-    dispatch(login({ad:search === "?ad"?true:false, username, password }))
+    dispatch(login({ email, password }))
       .unwrap()
-      .then(() => {
-        search === "?ad"?navigate("/admin"):navigate("/home");
+      .then((user) => {
+        console.log("zxcxzc",user,user.user);
+        if (user.user.role === 'admin') {
+          navigate("/admin");
+        } else if (user.user.role === 'user') {
+          navigate('/home')
+        }
+
         // window.location.reload();
       })
       .catch(() => {
         setLoading(false);
       });
   };
-  if (isLoggedIn) {
-    return <Navigate to="/home" />;
-  }
+
+  // if (isLoggedIn) {
+  //   return <Navigate to="/home" />;
+  // }
 
 
   return (
@@ -120,18 +127,18 @@ const LogIn = () => {
               <Form>
                 <div className="mb-4">
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-gray-700 text-sm font-bold mb-2"
                   >
-                    Username
+                    Email
                   </label>
                   <Field
-                    name="username"
+                    name="email"
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
                   <ErrorMessage
-                    name="username"
+                    name="email"
                     component="div"
                     className="text-red-500 text-xs italic"
                   />
