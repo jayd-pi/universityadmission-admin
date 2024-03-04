@@ -26,8 +26,9 @@ function CreateNewProduct() {
     quantity: 0,
     color: "",
     brand: "",
-    category: "",
+    material: "",
     images: "",
+    size: ""
   };
   const validationSchema = Yup.object({
     title: Yup.string().required("Title is required"),
@@ -35,15 +36,17 @@ function CreateNewProduct() {
     quantity: Yup.number().moreThan(0, "Quantity must be greater than or equal to 0").required("Quantity is required"),
     color: Yup.string().required("Color is required"),
     brand: Yup.string().required("Brand is required"),
-    category: Yup.string().required("Category is required"),
+    material: Yup.string().required("Material is required"),
     description: Yup.string()
       .min(4, "Description must be at least 4 characters")
       .required("Description is required"),
+    size: Yup.number().moreThan(0, "Size must be greater than or equal to 0").required("Size is required"),
   });
 
   const handleLogin = (formValue) => {
     setLoading(true);
     AuthService.postProduct({ ...formValue, images: image }).then((data) => {
+      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
@@ -327,18 +330,37 @@ function CreateNewProduct() {
 
             <div className="mb-4">
               <label
-                htmlFor="category"
+                htmlFor="material"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Category
+                Material
               </label>
               <Field
-                name="category"
+                name="material"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="category"
+                name="material"
+                component="div"
+                className="text-red-500 text-xs italic"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="size"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Size
+              </label>
+              <Field
+                name="size"
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <ErrorMessage
+                name="size"
                 component="div"
                 className="text-red-500 text-xs italic"
               />

@@ -64,7 +64,7 @@ function UserDropdown() {
         <p className="capitalize text-grayDark">
           {/* {userData?.firstName || "First Name"}{" "}
           {userData?.lastName || "Last Name"} */}
-          {isLogin && isLogin.firstname + " " + isLogin.lastname}
+          {isLogin && isLogin.name}
         </p>
         <ArrowDownIcon color="#373737" />
       </div>

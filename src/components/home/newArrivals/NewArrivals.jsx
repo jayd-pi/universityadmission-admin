@@ -51,7 +51,7 @@ const NewArrivals = () => {
   useEffect(() => {
     authService.getProduct()
       .then((response) => {
-        console.log("Respone API", response);
+        // console.log("Respone API", response);
         if (Array.isArray(response.data.data)) {
           setListProducts(response.data.data);
         } else {

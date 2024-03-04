@@ -16,11 +16,11 @@ import authService from "../../../api/user.service";
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  const _id = props.productName;
+  const id = props.productName;
   const idString = (id) => {
     return String(id).toLowerCase().split(" ").join("");
   };
-  const rootId = idString(_id);
+  const rootId = idString(id);
 
   const navigate = useNavigate();
   const productItem = props;
@@ -32,31 +32,22 @@ const Product = (props) => {
     });
   };
   const addToCart = () => {
-    // dispatch(cartActions.addItem({
-    //   id: productInfo._id,
-    //   productName: productInfo.productName,
-    //   quantity: 1,
-    //   img: productInfo.img,
-    //   badge: productInfo.badge,
-    //   price: productInfo.price,
-    //   colors: productInfo.color,
-    // }))
     authService
       .addToCart({
         cart: [
           {
-            _id: props.id,
+            id: props.id,
             count: 1,
             color: props.color,
           },
         ],
       })
       .then((data) => {
+        console.log(data);
         if (data.error) {
           console.log(data.error);
         } else {
           toast.success("Product added successfully", {
-            // position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -68,25 +59,6 @@ const Product = (props) => {
         }
       });
   };
-  // const addToCart =()=> {
-  //   dispatch(cartActions.addItem({
-  //     id: props._id,
-  //     img: props.img,
-  //     productName: props.productName,
-  //     price: props.price,
-  //   }))
-
-  //   toast.success('Product added successfully', {
-  //     position: "bottom-right",
-  //     autoClose: 3000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: false,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //   });
-  // }
   const addToWishlist = () => {
     authService
       .addToWishlist({

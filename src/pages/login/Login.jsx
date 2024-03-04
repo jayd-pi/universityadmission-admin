@@ -63,7 +63,7 @@ const LogIn = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then((user) => {
-        console.log("zxcxzc",user,user.user);
+        // console.log("zxcxzc",user,user.user);
         if (user.user.role === 'admin') {
           navigate("/admin");
         } else if (user.user.role === 'user') {

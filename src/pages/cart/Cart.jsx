@@ -31,6 +31,7 @@ const Cart = () => {
   const listVouchers = () => {
     authServices.getVoucher()
       .then((data) => {
+        console.log(data.data);
         if (data.error) {
           console.log(data.error);
         } else {

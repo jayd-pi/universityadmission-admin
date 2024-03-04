@@ -17,7 +17,7 @@ function DeleteBtn({ id, deleteFunction, queryKey = "", className = "" }) {
   const handleDelete = async () => {
     try {
       await deleteFunction(id);
-      // handle delete function
+      close();
     } catch (error) {
       console.log("Delete error", error?.message);
     }

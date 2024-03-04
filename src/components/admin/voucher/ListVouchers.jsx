@@ -21,17 +21,26 @@ function ListVouchers() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [load, setLoad] = useState(null);
+
+  
+
   // const debouncedSearchValue = useDebounce(searchParam, 500);
-  useEffect(() => {
-    AuthService.getVoucher().then((data) => {
+  const fetchVoucher = async () => {
+    await AuthService.getVoucher().then((data) => {
+      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        setlistVouchers(data.data);
+        setlistVouchers(data.data.payload);
       }
     });
+
+  }
+  useEffect(() => {
+    fetchVoucher();
   }, [load]);
   const deleteVoucherFunc = (id) => {
+    setLoad(true)
     AuthService.deleteVoucher(id).then((data) => {
       if (data.error) {
         console.log(data.error);
@@ -46,9 +55,10 @@ function ListVouchers() {
           progress: undefined,
           theme: "dark",
         });
-        setLoad(data.data);
+        setLoad(data.data.payload);
       }
-    });
+    });setLoad(false)
+    
   };
 
   const columns = [
@@ -56,16 +66,16 @@ function ListVouchers() {
       Header: " ",
       columns: [
         {
-          Header: "Name",
-          accessor: (data) => <p>{data?.name}</p>,
+          Header: "VoucherCode",
+          accessor: (data) => <p>{data?.voucherCode}</p>,
         },
         {
-          Header: "Discount",
-          accessor: (data) => <p>{data?.discount}</p>,
+          Header: "Discount(%)",
+          accessor: (data) => <p>{data?.discountPercentage}</p>,
         },
         {
-          Header: "Expiry",
-          accessor: (data) => <p>{data?.expiry}</p>,
+          Header: "EndDate",
+          accessor: (data) => <p>{data?.endDate}</p>,
         },
         {
           Header: " ",
@@ -75,11 +85,11 @@ function ListVouchers() {
                 {/* <Link to={`/admin/vouchers/${data?.id}`}>
                   <ShowDetail />
                 </Link> */}
-                <Link className="" to={`/admin/vouchers/${data?._id}/edit`}>
+                <Link className="" to={`/admin/vouchers/${data?.id}/edit`}>
                   <EditButton />
                 </Link>
                 <DeleteBtn
-                  id={data?._id}
+                  id={data?.id}
                   deleteFunction={deleteVoucherFunc}
                   queryKey={"getListOfficialMember"}
                 />

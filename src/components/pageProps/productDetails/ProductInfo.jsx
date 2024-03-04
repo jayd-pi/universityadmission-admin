@@ -25,7 +25,7 @@ const ProductInfo = ({ productInfo }) => {
         AuthService.addToCart({
           cart: [
             {
-              _id: productInfo._id,
+              _id: productInfo.id,
               count: 1,
               color: productInfo.color,
             },

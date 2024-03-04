@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SAVE_TYPE } from "../../../constants/constant";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
@@ -23,7 +23,7 @@ function EditVoucherDetail() {
           console.log(data.error);
         } else {
           setNewProduct(data.data);
-          setImage(data.data.images);
+          setImage(data.data.imageProducts);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -40,37 +40,41 @@ function EditVoucherDetail() {
     quantity: newProduct?.quantity || 0,
     color: newProduct?.color || "",
     brand: newProduct?.brand || "",
-    category: newProduct?.category || "",
-    images: newProduct?.images || "zxc",
+    material: newProduct?.materials || "",
+    imageProducts: newProduct?.imageProducts || "zxc",
+    size: newProduct?.size || 1,
+    
   };
   const validationSchema = Yup.object({
-    title: Yup.string().required("Email is required"),
-    price: Yup.string().required("Email is required"),
-    quantity: Yup.string().required("Email is required"),
-    color: Yup.string().required("Email is required"),
-    brand: Yup.string().required("Email is required"),
-    category: Yup.string().required("Email is required"),
+    title: Yup.string().required("Title is required"),
+    price: Yup.number().moreThan(0, "Price must be greater than or equal to 0").required("Price is required"),
+    quantity: Yup.number().moreThan(0, "Quantity must be greater than or equal to 0").required("Quantity is required"),
+    color: Yup.string().required("Color is required"),
+    brand: Yup.string().required("Brand is required"),
+    material: Yup.string().required("Material is required"),
     description: Yup.string()
-      .min(4, "Password must be at least 4 characters")
-      .required("Password is required"),
+      .min(4, "Description must be at least 4 characters")
+      .required("Description is required"),
+    size: Yup.number().moreThan(0, "Size must be greater than or equal to 0").required("Size is required"),
   });
 
   const handleLogin = (formValue) => {
     setLoading(true);
-    AuthService.putProduct(id,{ ...formValue, images: image }).then((data) => {
+    AuthService.putProduct(id, { ...formValue, images: image }).then((data) => {
+      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-                toast.success("edit product successfully", {
-                  // position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                });
+        toast.success("edit product successfully", {
+          // position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         navigate("/admin/products");
       }
     });
@@ -352,18 +356,37 @@ function EditVoucherDetail() {
 
               <div className="mb-4">
                 <label
-                  htmlFor="category"
+                  htmlFor="material"
                   className="block text-gray-700 text-sm font-bold mb-2"
                 >
-                  Category
+                  Material
                 </label>
                 <Field
-                  name="category"
+                  name="material"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="category"
+                  name="material"
+                  component="div"
+                  className="text-red-500 text-xs italic"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="size"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Size
+                </label>
+                <Field
+                  name="size"
+                  type="text"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+                <ErrorMessage
+                  name="size"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />

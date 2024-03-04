@@ -18,23 +18,29 @@ function CreateNewVoucher() {
   const handleCreateNewVoucher = () => {
   };
   const initialValues = {
-    name: "",
-    discount: 0,
-    expiry: "",
+    voucherCode: "",
+    totalPrice: 0,
+    startDate: "",
+    endDate: "",
+
   };
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    discount: Yup.number()
-      .moreThan(0, "Discount must be greater than 0")
-      .required("Discount is required"),
-    expiry: Yup.date()
-      .min(new Date(), "Expiry date must be in the future")
-      .required("Expiry date is required"),
+    voucherCode: Yup.string().required("VoucherCode is required"),
+    totalPrice: Yup.number()
+      .moreThan(0, "TotalPrice must be greater than 0")
+      .required("TotalPrice is required"),
+    startDate: Yup.date()
+      .min(new Date(), "StartDate date must be in the future")
+      .required("StartDate date is required"),
+    endDate: Yup.date()
+      .min(new Date(), "EndDate date must be in the future")
+      .required("EndDate date is required"),
   });
 
   const handleLogin = (formValue) => {
     setLoading(true);
     AuthService.postVoucher({ ...formValue }).then((data) => {
+      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
@@ -71,58 +77,78 @@ function CreateNewVoucher() {
           <Form>
             <div className="mb-4">
               <label
-                htmlFor="name"
+                htmlFor="voucherCode"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Name
+                VoucherCode
               </label>
               <Field
-                name="name"
+                name="voucherCode"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="name"
+                name="voucherCode"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
             <div className="mb-4">
               <label
-                htmlFor="discount"
+                htmlFor="totalPrice"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Discount
+                TotalPrice
               </label>
               <Field
-                name="discount"
+                name="totalPrice"
                 type="number"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="discount"
+                name="totalPrice"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
             <div className="mb-4">
               <label
-                htmlFor="price"
+                htmlFor="startDate"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Expiry
+                StartDate
               </label>
               <Field
-                name="expiry"
+                name="startDate"
                 type="date"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="expiry"
+                name="startDate"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="endDate"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                EndDate
+              </label>
+              <Field
+                name="endDate"
+                type="date"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <ErrorMessage
+                name="endDate"
+                component="div"
+                className="text-red-500 text-xs italic"
+              />
+            </div>
+
 
 
             <div className="flex items-center justify-between">
