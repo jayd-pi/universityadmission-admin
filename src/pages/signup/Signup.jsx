@@ -7,9 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = Yup.object({
-  firstname: Yup.string().required("first name is required"),
-  lastname: Yup.string().required("last name is required"),
-  mobile: Yup.string().required("mobile is required"),
+  name: Yup.string().required("Name is required"),
+  phone: Yup.string().required("Phone is required"),
   address: Yup.string().required("address is required"),
   email: Yup.string()
     .email("Invalid email address")
@@ -33,14 +32,12 @@ const Signup = () => {
 
   const formilk = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
+      name: "",
       email: "",
       address: "",
-      mobile: "",
-      birthday: "",
-      gender: "",
+      phone: "",
       password: "",
+      role: ""
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -52,10 +49,9 @@ const Signup = () => {
           values
         );
         if (response.data) {
+          console.log(response.data);
           navigate("/login");
         }
-        // const token = response.data.token;
-        // localStorage.setItem('token', token);
       } catch (error) {
         alert(error.message);
         console.error("Register failed:", error.response.data);
@@ -82,57 +78,28 @@ const Signup = () => {
               <div className="flex space-x-4">
                 <div className="flex-1 relative">
                   <label
-                    htmlFor="firstname"
+                    htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 "
                   >
-                    Firstname
+                    Name
                   </label>
                   <input
                     type="text"
-                    name="firstname"
-                    id="firstname"
-                    value={formilk.values.firstname}
+                    name="name"
+                    id="name"
+                    value={formilk.values.name}
                     onChange={formilk.handleChange}
                     onBlur={formilk.handleBlur}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                      formilk.touched.firstname && formilk.errors.firstname
+                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.name && formilk.errors.name
                         ? "border-red-500"
                         : ""
-                    }`}
+                      }`}
                     placeholder="Phuoc Huu"
                     required=""
                   />
-                  {formilk.touched.firstname && formilk.errors.firstname && (
+                  {formilk.touched.name && formilk.errors.name && (
                     <div className="text-red-500 text-sm">
-                      {formilk.errors.firstname}
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 relative">
-                  <label
-                    htmlFor="lastname"
-                    className="block mb-2 text-sm font-medium text-gray-900 "
-                  >
-                    Lastname
-                  </label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    id="lastname"
-                    value={formilk.values.lastname}
-                    onChange={formilk.handleChange}
-                    onBlur={formilk.handleBlur}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                      formilk.touched.lastname && formilk.errors.lastname
-                        ? "border-red-500"
-                        : " "
-                    }`}
-                    placeholder="phuochuu"
-                    required=""
-                  />
-                  {formilk.touched.lastname && formilk.errors.lastname && (
-                    <div className="text-red-500 text-sm">
-                      {formilk.errors.lastname}
+                      {formilk.errors.name}
                     </div>
                   )}
                 </div>
@@ -152,11 +119,10 @@ const Signup = () => {
                   value={formilk.values.email}
                   onChange={formilk.handleChange}
                   onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                    formilk.touched.email && formilk.errors.email
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.email && formilk.errors.email
                       ? "border-red-500"
                       : ""
-                  }`}
+                    }`}
                   placeholder="example@example.com"
                   required=""
                 />
@@ -168,71 +134,30 @@ const Signup = () => {
               </div>
               <div>
                 <label
-                  htmlFor="mobile"
+                  htmlFor="phone"
                   className="block mb-2 text-sm font-medium text-gray-900 "
                 >
-                  Mobile
+                  Phone
                 </label>
                 <input
                   type="text"
-                  name="mobile"
-                  id="mobile"
-                  value={formilk.values.mobile}
+                  name="phone"
+                  id="phone"
+                  value={formilk.values.phone}
                   onChange={formilk.handleChange}
                   onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                    formilk.touched.mobile && formilk.errors.mobile
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.phone && formilk.errors.phone
                       ? "border-red-500"
                       : ""
-                  }`}
+                    }`}
                   placeholder="0987654327"
                   required=""
                 />
-                {formilk.touched.mobile && formilk.errors.mobile && (
+                {formilk.touched.phone && formilk.errors.phone && (
                   <div className="text-red-500 text-sm">
-                    {formilk.errors.mobile}
+                    {formilk.errors.phone}
                   </div>
                 )}
-              </div>
-              <div className="flex space-x-4">
-                <div className="flex-1 relative">
-                  <label
-                    htmlFor="gender"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Gender
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    value={formilk.values.gender}
-                    onChange={formilk.handleChange}
-                    onBlur={formilk.handleBlur}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="other">Other</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-                <div className="flex-1 relative">
-                  <label
-                    htmlFor="birthday"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Birthday
-                  </label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formilk.values.birthday}
-                    onChange={formilk.handleChange}
-                    onBlur={formilk.handleBlur}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
-                  />
-                </div>
               </div>
 
               <div>
@@ -249,11 +174,10 @@ const Signup = () => {
                   value={formilk.values.address}
                   onChange={formilk.handleChange}
                   onBlur={formilk.handleBlur}
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                    formilk.touched.address && formilk.errors.address
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.address && formilk.errors.address
                       ? "border-red-500"
                       : ""
-                  }`}
+                    }`}
                   placeholder="123 Main Street, Cityville"
                   required=""
                 />
@@ -263,6 +187,24 @@ const Signup = () => {
                   </div>
                 )}
               </div>
+              <div className="flex-1 relative">
+                  <label
+                    htmlFor="role"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Role
+                  </label>
+                  <select
+                    name="role"
+                    id="role"
+                    value={formilk.values.role}
+                    onChange={formilk.handleChange}
+                    onBlur={formilk.handleBlur}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option value="user">user</option>
+                  </select>
+                </div>
               <div className="flex space-x-4">
                 <div className="flex-1 relative">
                   <label
@@ -280,11 +222,10 @@ const Signup = () => {
                       onBlur={formilk.handleBlur}
                       onChange={formilk.handleChange}
                       placeholder="••••••••"
-                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                        formilk.touched.password && formilk.errors.password
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.password && formilk.errors.password
                           ? "border-red-500"
                           : " "
-                      }`}
+                        }`}
                       required=""
                     />
                     <span
@@ -320,12 +261,11 @@ const Signup = () => {
                       onBlur={formilk.handleBlur}
                       onChange={formilk.handleChange}
                       placeholder="••••••••"
-                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                        formilk.touched.confirmPassword &&
-                        formilk.errors.confirmPassword
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 ${formilk.touched.confirmPassword &&
+                          formilk.errors.confirmPassword
                           ? "border-red-500"
                           : " "
-                      } `}
+                        } `}
                       required=""
                     />
                     {formilk.touched.confirmPassword &&

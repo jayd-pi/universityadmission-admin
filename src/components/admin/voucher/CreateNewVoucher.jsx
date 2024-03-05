@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { SAVE_TYPE } from "../../../constants/constant";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
-import PrimaryInput from "../PrimaryInput";
-import PrimaryTextArea from "../PrimaryTextArea";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../api/voucher.service";
-import { storeImageToFireBase } from "../../../lib/storeImageToFirebase";
 function CreateNewVoucher() {
   let navigate = useNavigate();
   const [newVoucher, setNewVoucher] = useState();

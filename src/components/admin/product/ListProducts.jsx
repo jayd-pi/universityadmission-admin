@@ -22,7 +22,8 @@ function ListProducts() {
   const [limit, setLimit] = useState(10);
   const [load, setLoad] = useState(null);
   // const debouncedSearchValue = useDebounce(searchParam, 500);
-  useEffect(() => {
+
+  const fetProduct = async () => {
     AuthService.getProduct().then((data) => {
       console.log(data);
       if (data.error) {
@@ -31,13 +32,17 @@ function ListProducts() {
         setListProducts(data.data.data);
       }
     });
+  }
+  useEffect(() => {
+    fetProduct();
   }, [load]);
   const deleteProductFunc = (id) => {
+    setLoad(true);
     AuthService.deleteProduct(id).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        toast.success("delete product successfully", {
+        toast.success("Delete product successfully", {
           // position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -50,6 +55,7 @@ function ListProducts() {
         setLoad(data.data.data);
       }
     });
+    setLoad(false);
   };
 
   const columns = [

@@ -31,7 +31,7 @@ const addToWishlist = (values) => {
   );
 };
 const getCart = () => {
-  return axios.get(API_URL + "cart", { headers: authHeader() });
+  return axios.get(BASE_URL + "shoppingCart/viewCart", { headers: authHeader() });
 };
 const getOrder = () => {
   return axios.get(API_URL + "getallorders", { headers: authHeader() });

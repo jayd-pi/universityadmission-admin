@@ -9,8 +9,8 @@ import Product from "../products/Product";
 //   newArrThree,
 //   newArrFour,
 // } from "../../../assets/images/index";
-import SampleNextArrow from "./SampleNextArrow";
-import SamplePrevArrow from "./SamplePrevArrow";
+import SampleNextArrow from "../SampleNextArrow";
+import SamplePrevArrow from "../SamplePrevArrow";
 import authService from "../../../api/product.service";
 const NewArrivals = () => {
   const settings = {

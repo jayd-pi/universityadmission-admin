@@ -1,14 +1,15 @@
+
 import React, { useEffect, useState } from "react";
 import "./cart.css";
 import { Col, Container, Row } from "reactstrap";
 
 import { motion } from "framer-motion";
-import { cartActions } from "../../redux/slice/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import authService from "../../api/user.service";
 import authServices from "../../api/voucher.service";
-import { toast } from "react-toastify";
+
 const Cart = () => {
   const [vouchers, setVouchers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,85 +17,157 @@ const Cart = () => {
   const [cartTotal, setCartTotal] = useState("");
   const [load, setLoad] = useState(null);
   const [usedVouchers, setUsedVouchers] = useState([]);
+
   useEffect(() => {
     listVouchers();
-    authService.getCart().then((data) => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        setListCart(data.data);
-        setCartTotal(data.data?.cartTotal);
-      }
-    });
+    loadCartFromLocalStorage();
   }, [load]);
 
-  const listVouchers = () => {
-    authServices.getVoucher()
-      .then((data) => {
-        console.log(data.data);
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          setVouchers(data.data);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching vouchers:', error);
-      });
-  };
-  const updateCart = (updatedCart) => {
-    authService.updateCart(updatedCart).then((data) => {
+  // handle Call API for fetch data
+  const fetchCart = async () => {
+    authService.getCart().then((data) => {
+      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        setListCart(data.data);
+        setListCart(data.data.data);
         setCartTotal(data.data?.cartTotal);
       }
     });
-  };
-  const Tr = ({ item }) => {
+  }
 
-    const deleteProduct = () => {
-      authService.deleteCart(item.product._id).then((data) => {
+  const loadCartFromLocalStorage = () => {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    // console.log("Stored cart data:", storedCart);
+    if (Array.isArray(storedCart) && storedCart.length > 0) {
+      const products = storedCart.map(item => ({
+        product: {
+          img: item.img,
+          productName: item.productName
+        },
+        price: item.price,
+        quantity: 1,
+        productId: item._id
+      }));
+      const total = products.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+      setListCart(products);
+      setCartTotal(total);
+    } else {
+      console.log("Invalid cart data found in local storage");
+    }
+  };
+
+  const listVouchers = () => {
+    authServices
+      .getVoucher()
+      .then((data) => {
         if (data.error) {
           console.log(data.error);
         } else {
-          setLoad(data.data);
+          setVouchers(data.data.payload);
         }
+      })
+      .catch((error) => {
+        console.error("Error fetching vouchers:", error);
       });
-    };
+  };
 
-    const increaseQuantity = (productId) => {
-      const updatedCart = listCart.products.map((item) => {
-        if (item.product._id === productId) {
-          return { ...item, count: item.count + 1 };
-        }
-        return item;
-      });
-      updateCart(updatedCart);
-    };
+  // const updateCart = (updatedCart) => {
+  //   authService.updateCart(updatedCart).then((data) => {
+  //     if (data.error) {
+  //       console.log(data.error);
+  //     } else {
+  //       setListCart(data.data);
+  //       setCartTotal(data.data?.cartTotal);
+  //       localStorage.setItem("cart", JSON.stringify(data.data));
+  //     }
+  //   });
+  // };
 
-    const decreaseQuantity = (productId) => {
-      const updatedCart = listCart.products.map((item) => {
-        if (item.product._id === productId && item.count > 1) {
-          return { ...item, count: item.count - 1 };
-        }
-        return item;
-      });
-      updateCart(updatedCart);
+
+  // handle delelete product API request
+  //   const Tr = ({ item }) => {
+  //     const deleteProduct = () => {
+  //       authService.deleteCart(item.product._id).then((data) => {
+  //         if (data.error) {
+  //           console.log(data.error);
+  //         } else {
+  //           setLoad(data.data);
+  //         }
+  //       });
+  // };
+
+  const deleteProductFromLocalStorage = (productId) => {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    if (Array.isArray(storedCart) && storedCart.length > 0 && productId) {
+      // Lọc ra các mục khác mục cần xóa
+      const updatedCart = storedCart.filter(item => item.productId !== productId);
+      // Xóa luôn trường price khỏi mỗi mục trong mảng đã lọc
+      const updatedCartWithoutPrice = updatedCart.map(({price, ...rest}) => rest);
+      // Tính toán lại tổng tiền
+      const total = updatedCartWithoutPrice.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+      // Cập nhật state và lưu vào local storage
+      setCartTotal(total);
+      setListCart(updatedCartWithoutPrice);
+      localStorage.setItem("cart", JSON.stringify(updatedCartWithoutPrice));
+    } else {
+      console.log("Dữ liệu giỏ hàng không hợp lệ hoặc productId không tồn tại");
+    }
+  };
+  
+  const Tr = ({ item }) => {
+    const deleteProduct = () => {
+      if (item.productId) {
+        deleteProductFromLocalStorage(item.productId);
+      } else {
+        console.log("ProductID is undefined");
+      }
     };
+  
+
+    // const increaseQuantity = (productId) => {
+    //   const updatedCart = listCart.map((cartItem) => {
+    //     if (cartItem.product._id === productId) {
+    //       return { ...cartItem, count: cartItem.count + 1 };
+    //     }
+    //     return cartItem;
+    //   });
+    //   updateCart(updatedCart);
+    // };
+
+    // const decreaseQuantity = (productId) => {
+    //   const updatedCart = listCart.map((cartItem) => {
+    //     if (cartItem.product._id === productId && cartItem.count > 1) {
+    //       return { ...cartItem, count: cartItem.count - 1 };
+    //     }
+    //     return cartItem;
+    //   });
+    //   updateCart(updatedCart);
+    // };
 
     return (
       <tr>
         <td>
-          <img src={item.product.images} alt="" />
+          {/* <img src={item.product.img} alt="" /> */}
+          {item.product && item.product.img && <img src={item.product.img} alt="" />}
         </td>
-        <td>{item.product.title}</td>
-        <td>${item.price}</td>
+        {/* <td>{item.product.productName}</td> */}
+        <td>{item.product && item.product.productName}</td>
+        <td>{item.price}</td>
         <td>
-          <button onClick={() => decreaseQuantity(item.product._id)} className=" small-btn text-white font-bold py-1 px-2 rounded-md text-sm">-</button>
-          {item.count}
-          <button onClick={() => increaseQuantity(item.product._id)} className=" small-btn text-white font-bold py-1 px-2 rounded-md text-sm">+</button>
+          {/* <button
+            onClick={() => decreaseQuantity(item.product._id)}
+            className="small-btn text-white font-bold py-1 px-2 rounded-md text-sm"
+          >
+            -
+          </button> */}
+          {item.quantity}
+          {/* <button
+            onClick={() => increaseQuantity(item.product._id)}
+            className="small-btn text-white font-bold py-1 px-2 rounded-md text-sm"
+          >
+            +
+          </button> */}
         </td>
         <td>
           <button onClick={deleteProduct}>Delete</button>
@@ -102,40 +175,18 @@ const Cart = () => {
       </tr>
     );
   };
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
+
   const addVoucher = () => {
     if (!searchQuery) {
-      toast.error("Please enter a voucher code", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Please enter a voucher code", { theme: "dark" });
     } else if (usedVouchers.includes(searchQuery)) {
-      toast.error("Voucher has already been used", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Voucher has already been used", { theme: "dark" });
     } else if (usedVouchers.length > 0) {
-      toast.error("Only one voucher can be applied at a time", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Only one voucher can be applied at a time", { theme: "dark" });
     } else {
       authService
         .applyCoupon({
@@ -144,42 +195,17 @@ const Cart = () => {
         .then((data) => {
           if (data.error) {
             console.log(data.error);
-            toast.error("Error applying voucher", {
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
+            toast.error("Error applying voucher", { theme: "dark" });
           } else if (!data.data) {
-            toast.error("Invalid voucher code", {
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
+            toast.error("Invalid voucher code", { theme: "dark" });
           } else {
             setCartTotal(data.data);
             setUsedVouchers([...usedVouchers, searchQuery]);
-            toast.success("Voucher applied successfully", {
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
+            toast.success("Voucher applied successfully", { theme: "dark" });
           }
         });
     }
   };
-
 
   return (
     <div>
@@ -187,12 +213,12 @@ const Cart = () => {
         <Container className="pl-8 pr-8">
           <Row className="d-flex ">
             <Col lg="9">
-              {listCart?.products && listCart?.products?.length > 0 ? (
+              {listCart?.length > 0 ? (
                 <table className="table bordered">
                   <thead>
                     <tr>
                       <th>Image</th>
-                      <th>Title</th>
+                      <th>Name</th>
                       <th>Price</th>
                       <th>Quantity</th>
                       <th>Delete</th>
@@ -200,7 +226,7 @@ const Cart = () => {
                   </thead>
 
                   <tbody>
-                    {listCart?.products.map((item, index) => (
+                    {listCart.map((item, index) => (
                       <Tr item={item} key={index}></Tr>
                     ))}
                   </tbody>
@@ -220,13 +246,6 @@ const Cart = () => {
                 Taxes and shipping will calculate in checkout
               </p>
               <div>
-                {/* <div style={{ display: "flex", alignItems: "center" }}>
-
-
-                  <button className="buy_btn w-100">
-                    <Link to="/shop">add coupon</Link>
-                  </button>
-                </div> */}
                 <div className="relative mt-6">
                   <input
                     type="text"
@@ -265,8 +284,10 @@ const Cart = () => {
                     </h6>
                     {vouchers.map((voucher, index) => (
                       <div key={index} className="mb-2">
-                        <li
-                          key={index}>{voucher.name} - {voucher.discount}% off</li>
+                        <li key={index}>
+                          {voucher.voucherCode} - {voucher.discountPercentage}%
+                          off
+                        </li>
                       </div>
                     ))}
                   </div>
@@ -279,7 +300,6 @@ const Cart = () => {
                 </button>
               </div>
             </Col>
-
           </Row>
         </Container>
       </section>

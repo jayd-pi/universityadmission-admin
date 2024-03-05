@@ -57,8 +57,8 @@ function ListVouchers() {
         });
         setLoad(data.data.payload);
       }
-    });setLoad(false)
-    
+    });
+    setLoad(false)
   };
 
   const columns = [

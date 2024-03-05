@@ -15,6 +15,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import authService from "../../../api/user.service";
 
 const Product = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   const id = props.productName;
   const idString = (id) => {
@@ -31,19 +32,53 @@ const Product = (props) => {
       },
     });
   };
+  // const addToCart = () => {
+  //   authService
+  //     .addToCart(
+  //        [
+  //         {
+  //           productName: props.productName,
+  //           price: props.price,
+  //           quantity: 1,
+  //           discount: props.discount,
+  //           productId: props._id ,
+  //         },
+  //       ],
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data);
+  //       if (data.error) {
+  //         console.log(data.error);
+  //       } else {
+  //         toast.success("Product added successfully", {
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: false,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "dark",
+  //         });
+  //         const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  //         const updatedCart = [...existingCart, props];
+  //         localStorage.setItem("cart", JSON.stringify(updatedCart));
+  //       }
+  //     });
+  // };
+
   const addToCart = () => {
     authService
-      .addToCart({
-        cart: [
-          {
-            id: props.id,
-            count: 1,
-            color: props.color,
-          },
-        ],
-      })
+      .addToCart([
+        {
+          productName: props.productName,
+          price: props.price,
+          quantity: 1,
+          discount: props.discount,
+          productId: props._id,
+        },
+      ])
       .then((data) => {
-        console.log(data);
+        console.log(data.data);
         if (data.error) {
           console.log(data.error);
         } else {
@@ -56,9 +91,20 @@ const Product = (props) => {
             progress: undefined,
             theme: "dark",
           });
+  
+          // Lấy danh sách sản phẩm từ local storage
+          const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+          // Thêm sản phẩm mới vào danh sách
+          const updatedCart = [...existingCart, props];
+  
+          // Chuyển đổi danh sách sản phẩm thành chuỗi JSON và lưu vào local storage
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
       });
   };
+  
+
   const addToWishlist = () => {
     authService
       .addToWishlist({

@@ -41,14 +41,6 @@ const LogIn = () => {
     const providerGoogle = new GoogleAuthProvider();
     signInWithPopup(auth, providerGoogle)
       .then(function (result) {
-        // console.log("🚀 ~ result:", result)
-        // signInMail(result.user.accessToken).then((data) => {
-        //   if (data.error) {
-        //     console.log(data.error);
-        //   } else {
-
-        //   }console.log(data);
-        // });
       })
       .catch(function (error) {
         var errorCode = error.code;

@@ -17,7 +17,7 @@ const putProduct = (id,values) => {
   });
 };
 const deleteProduct = (id) => {
-  return axios.delete(`${API_URL}product/${id}`, { headers: authHeader() });
+  return axios.delete(`${API_URL}product/deleteProduct/${id}`, { headers: authHeader() });
 };
 export default {
   postProduct,
