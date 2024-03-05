@@ -2,11 +2,10 @@
   Project môn học SWP391 - Hệ thống bán các sản phẩm nội thất
 
 ### Members
-  1. Nguyễn Hữu Phước - SE160557
-  2. Nguyễn Thế Anh - SE160559
+  1. Nguyễn Thế Anh - SE160559
+  2. Nguyễn Hoàng Hải
   3.
   4.
-  5.
 ### Lưu ý:
   - Branch main để chứa các code đã ổn định để devOps build và đưa lên host. Không push code đang phát triển lên branch này. 
   - Các code đang dev chỉ được push lên branch dev "branch name for each dev".
