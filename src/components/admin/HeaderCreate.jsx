@@ -28,7 +28,7 @@ function HeaderCreate({
             title={btnSaveTitle}
             handleConfirmUpdate={handleClickSaveCreate}
           >
-            <PrimaryBtn className="mt-4 min-w-[140px]" disabled={disabledBtn}>
+            <PrimaryBtn className="min-w-[140px]" disabled={disabledBtn}>
               Save
             </PrimaryBtn>
           </ConfirmSavePopup>
