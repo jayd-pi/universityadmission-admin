@@ -4,61 +4,50 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import AuthService from "../../../api/voucher.service";
+import AuthService from "../../../api/majorInplan.service";
 function CreateNewVoucher() {
   let navigate = useNavigate();
-  const [newVoucher, setNewVoucher] = useState();
   const [loading, setLoading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState();
-  const [image, setImage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const handleCreateNewVoucher = () => {
   };
   const initialValues = {
-    voucherCode: "",
-    totalPrice: 0,
-    startDate: "",
-    endDate: "",
-
+    majorName: "",
+    schoolYear: "",
+    numberOfStudent: 1,
+    subjectGroup: []
   };
   const validationSchema = Yup.object({
-    voucherCode: Yup.string().required("VoucherCode is required"),
-    totalPrice: Yup.number()
-      .moreThan(0, "TotalPrice must be greater than 0")
-      .required("TotalPrice is required"),
-    startDate: Yup.date()
-      .min(new Date(), "StartDate date must be in the future")
-      .required("StartDate date is required"),
-    endDate: Yup.date()
-      .min(new Date(), "EndDate date must be in the future")
-      .required("EndDate date is required"),
+    majorName: Yup.string().required("Major name is required"),
+    schoolYear: Yup.string().required("School year is required"),
+    numberOfStudent: Yup.number().required("Number of students is required").min(1, "Number of students must be at least 1"),
   });
 
   const handleLogin = (formValue) => {
     setLoading(true);
-    AuthService.postVoucher({ ...formValue }).then((data) => {
+    AuthService.postMajorInPlan({ ...formValue }).then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        navigate("/admin/vouchers");
+        navigate("/admin/mjp");
       }
+      setLoading(false);
     });
-    // dispatch(
-    //   login({ ad: search === "?ad" ? true : false, username, password })
-    // )
-    //   .unwrap()
-    //   .then(() => {
-    //     navigate("/admin/products");
-    //     // window.location.reload();
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
   };
+  const handleSelectChange = (e, setFieldValue, fieldName) => {
+    const options = e.target.options;
+    const selectedOptions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedOptions.push(options[i].getAttribute("name"));
+      }
+    }
+    setFieldValue(fieldName, selectedOptions);
+  };
+  
   return (
     <HeaderCreate
-      homeUrl="/admin/vouchers"
+      homeUrl="/admin/mjp"
       btnSaveTitle="voucher"
       btnSaveType={SAVE_TYPE.CREATE}
       handleClickSaveCreate={handleCreateNewVoucher}
@@ -73,80 +62,71 @@ function CreateNewVoucher() {
         {({ isSubmitting }) => (
           <Form>
             <div className="mb-4">
-              <label
-                htmlFor="voucherCode"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                VoucherCode
+              <label htmlFor="majorName" className="block text-gray-700 text-sm font-bold mb-2">
+                Major Name
               </label>
               <Field
-                name="voucherCode"
+                name="majorName"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="voucherCode"
+                name="majorName"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
+
             <div className="mb-4">
-              <label
-                htmlFor="totalPrice"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                TotalPrice
+              <label htmlFor="schoolYear" className="block text-gray-700 text-sm font-bold mb-2">
+                School Year
               </label>
               <Field
-                name="totalPrice"
+                name="schoolYear"
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <ErrorMessage
+                name="schoolYear"
+                component="div"
+                className="text-red-500 text-xs italic"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="numberOfStudent" className="block text-gray-700 text-sm font-bold mb-2">
+                Number of Students
+              </label>
+              <Field
+                name="numberOfStudent"
                 type="number"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="totalPrice"
+                name="numberOfStudent"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="startDate"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                StartDate
+              <label htmlFor="subjectGroup" className="block text-gray-700 text-sm font-bold mb-2">
+              SubjectGroup
               </label>
               <Field
-                name="startDate"
-                type="date"
+                name="subjectGroup"
+                as="select"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
+                multiple
+                // eslint-disable-next-line no-undef
+                onChange={(e) => handleSelectChange(e, setFieldValue)}
+              >
+              </Field>
               <ErrorMessage
-                name="startDate"
+                name="subjectGroup"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="endDate"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                EndDate
-              </label>
-              <Field
-                name="endDate"
-                type="date"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              <ErrorMessage
-                name="endDate"
-                component="div"
-                className="text-red-500 text-xs italic"
-              />
-            </div>
-
-
 
             <div className="flex items-center justify-between">
               <button

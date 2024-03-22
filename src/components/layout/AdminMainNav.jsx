@@ -41,12 +41,12 @@ function AdminMainNav() {
     },
     {
       id: 4,
-      name: "Account",
+      name: "Major",
       icon: <CollectionIcon />,
-      href: "/admin/account",
+      href: "/admin/major",
       isActive:
-        location.pathname.includes("/admin/account") ||
-        location.pathname.includes("/admin/account"),
+        location.pathname.includes("/admin/major") ||
+        location.pathname.includes("/admin/major"),
     },
   ];
 

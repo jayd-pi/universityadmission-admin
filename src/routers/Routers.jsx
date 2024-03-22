@@ -2,14 +2,15 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AdminLayout from "../components/layout/AdminLayout";
-import ListProducts from "../components/admin/product/ListProducts";
-import ListVouchers from "../components/admin/majorInPlan/ListVouchers";
 import AdminDashboard from "../components/admin/dashboard/AdminDashboard";
 import CreateNewProduct from "../components/admin/product/CreateNewProduct";
+import ListProducts from "../components/admin/product/ListProducts";
 import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
+import ListVouchers from "../components/admin/majorInPlan/ListVouchers";
 import CreateNewVoucher from "../components/admin/majorInPlan/CreateNewVoucher";
 import EditVoucherDetail from "../components/admin/majorInPlan/EditVoucherDetail";
+import ListMajor from "../components/admin/major/ListMajor";
 
 
 const Routers = () => {
@@ -65,11 +66,11 @@ const Routers = () => {
           </AdminLayout>
         }
       />
-        <Route
+      <Route
         path="admin/mjp"
         element={
           <AdminLayout>
-            <ListVouchers/>
+            <ListVouchers />
           </AdminLayout>
         }
       />
@@ -89,8 +90,15 @@ const Routers = () => {
           </AdminLayout>
         }
       />
+      <Route
+        path="admin/major"
+        element={
+          <AdminLayout>
+            <ListMajor />
+          </AdminLayout>
+        }
+      />
     </Routes>
   );
 };
-
 export default Routers;

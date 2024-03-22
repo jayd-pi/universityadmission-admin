@@ -106,7 +106,7 @@ function ListVouchers() {
           onChange={(e) => setSearchParam(e.target.value)}
           value={searchParam || ""}
         />
-        <Link to={`/admin/vouchers/create`}>
+        <Link to={`/admin/mjp/create`}>
           <PrimaryBtn className="min-w-[180px]">+ Add MajorInP</PrimaryBtn>
         </Link>
       </div>

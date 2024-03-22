@@ -4,40 +4,43 @@ import SearchInput from "../SearchInput";
 import { Link } from "react-router-dom";
 import PrimaryBtn from "../PrimaryBtn";
 import Table from "../Table";
-import ShowDetail from "../ShowDetail";
+// import useDebounce from "../../../custom-hooks/useDebounce";
+// import ShowDetail from "../ShowDetail";
 import Pagination from "../Pagination";
 import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
-import AuthService from "../../../api/university.service";
+import AuthService from "../../../api/major.service";
 import { toast } from "react-toastify";
-function ListProducts() {
+function ListMajor() {
   const [searchParam, setSearchParam] = useState();
-  const [listProducts, setListProducts] = useState([]);
+  const [listVouchers, setlistVouchers] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [load, setLoad] = useState(null);
-  // const debouncedSearchValue = useDebounce(searchParam, 500);
 
-  const fetProduct = async () => {
-    AuthService.getUniversity().then((data) => {
+
+  // const debouncedSearchValue = useDebounce(searchParam, 500);
+  const fetchVoucher = async () => {
+    await AuthService.getMajor().then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        setListProducts(data.data);
+        setlistVouchers(data.data);
       }
     });
+
   }
   useEffect(() => {
-    fetProduct();
+    fetchVoucher();
   }, [load]);
-  const deleteProductFunc = (id) => {
-    setLoad(true);
-    AuthService.deleteUniversity(id).then((data) => {
+  const deleteMajorFunc = (id) => {
+    setLoad(true)
+    AuthService.deleteMajor(id).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        toast.success("Delete University successfully", {
+        toast.success("Delete MajorInPlan successfully", {
           // position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -50,7 +53,7 @@ function ListProducts() {
         setLoad(data.data);
       }
     });
-    setLoad(false);
+    setLoad(false)
   };
 
   const columns = [
@@ -66,32 +69,27 @@ function ListProducts() {
           accessor: (data) => <p>{data?.code}</p>,
         },
         {
-          Header: "Description",
-          accessor: (data) => <p>{data?.description}</p>,
+          Header: "EffectiveDate",
+          accessor: (data) => <p>{data?.effectiveDate}</p>,
         },
         {
-          Header: "YearEstablish",
-          accessor: (data) => <p>{data?.yearEstablish}</p>,
-        },
-        {
-          Header: "AdmissionPolicy",
-          accessor: (data) => <p>{data?.admissionPolicy}</p>,
-        },
-        {
-          Header: "Address",
-          accessor: (data) => <p>{data?.address}</p>,
+          Header: "Note",
+          accessor: (data) => <p>{data?.note}</p>,
         },
         {
           Header: " ",
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                <Link className="" to={`/admin/university/${data?._id}/edit`}>
+                {/* <Link to={`/admin/mjp/${data?.id}`}>
+                  <ShowDetail />
+                </Link> */}
+                <Link className="" to={`/admin/major/${data?._id}/edit`}>
                   <EditButton />
                 </Link>
                 <DeleteBtn
                   id={data?._id}
-                  deleteFunction={deleteProductFunc}
+                  deleteFunction={deleteMajorFunc}
                   queryKey={"getListOfficialMember"}
                 />
               </div>
@@ -104,34 +102,32 @@ function ListProducts() {
 
   return (
     <div>
-      <Title >List University</Title>
+      <Title >List Major</Title>
       <div className="flex flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
         <SearchInput
           placeholder="Search by name"
           onChange={(e) => setSearchParam(e.target.value)}
           value={searchParam || ""}
         />
-        <Link to={`/admin/university/create`}>
-          <PrimaryBtn className="min-w-[180px]">+ Add University</PrimaryBtn>
+        <Link to={`/admin/major/create`}>
+          <PrimaryBtn className="min-w-[180px]">+ Add Major</PrimaryBtn>
         </Link>
       </div>
       <div className="bg-white table-style block-border">
         <Table
           pageSizePagination={limit}
           columns={columns}
-          data={listProducts}
+          data={listVouchers}
         />
       </div>
-
       <Pagination
         pageSize={limit}
         setPageSize={setLimit}
         currentPage={page}
         setCurrentPage={setPage}
-        totalItems={listProducts.lenhth}
+        totalItems={listVouchers.length}
       />
     </div>
   );
 }
-
-export default ListProducts;
+export default ListMajor;

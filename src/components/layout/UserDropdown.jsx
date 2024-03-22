@@ -62,9 +62,9 @@ function UserDropdown() {
       >
         <AvatarIcon />
         <p className="capitalize text-grayDark">
-          {/* {userData?.firstName || "First Name"}{" "}
-          {userData?.lastName || "Last Name"} */}
-          {isLogin && isLogin.name}
+          {userData?.firstName || "First Name"}{" "}
+          {userData?.lastName || "Last Name"}
+          {/* {isLogin && isLogin.name} */}
         </p>
         <ArrowDownIcon color="#373737" />
       </div>
