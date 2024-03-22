@@ -64,7 +64,7 @@ function EditMJPDetail() {
     newVoucher && (
       <HeaderCreate
         homeUrl="/admin/mjp"
-        btnSaveTitle="update Voucher"
+        btnSaveTitle="Update MajorInPlan"
         btnSaveType={SAVE_TYPE.UPDATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}

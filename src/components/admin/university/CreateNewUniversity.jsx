@@ -68,7 +68,7 @@ function CreateNewUniversity() {
   return (
     <HeaderCreate
       homeUrl="/admin/university"
-      btnSaveTitle="product"
+      btnSaveTitle="Create University"
       btnSaveType={SAVE_TYPE.CREATE}
       handleClickSaveCreate={handleCreateNewProduct}
       disabledBtn={false}

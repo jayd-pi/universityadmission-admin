@@ -10,6 +10,8 @@ import ListMJP from "../components/admin/majorInPlan/ListMJP";
 import CreateNewMJP from "../components/admin/majorInPlan/CreateNewMJP";
 import EditMJPDetail from "../components/admin/majorInPlan/EditMJPDetail";
 import ListMajor from "../components/admin/major/ListMajor";
+import CreateNewMajor from "../components/admin/major/CreateNewMajor";
+import EditMajorDetail from "../components/admin/major/EditMajorDetail";
 
 
 const Routers = () => {
@@ -86,6 +88,22 @@ const Routers = () => {
         element={
           <AdminLayout>
             <ListMajor />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/major/create"
+        element={
+          <AdminLayout>
+            <CreateNewMajor />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/major/:id/edit"
+        element={
+          <AdminLayout>
+            <EditMajorDetail />
           </AdminLayout>
         }
       />

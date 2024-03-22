@@ -48,7 +48,7 @@ function CreateNewMJP() {
   return (
     <HeaderCreate
       homeUrl="/admin/mjp"
-      btnSaveTitle="voucher"
+      btnSaveTitle="Create MajorInPlan"
       btnSaveType={SAVE_TYPE.CREATE}
       handleClickSaveCreate={handleCreateNewVoucher}
       disabledBtn={false}

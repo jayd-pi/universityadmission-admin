@@ -4,60 +4,48 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import AuthService from "../../../api/university.service";
+import AuthService from "../../../api/major.service";
 import { toast } from "react-toastify";
-function EditUniversityDetail() {
+function EditMajorDetail() {
   let navigate = useNavigate();
   const { id } = useParams();
-  const [newProduct, setNewProduct] = useState(false);
+  const [newVoucher, setNewVoucher] = useState(false);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AuthService.getUniversityById(id);
+        const data = await AuthService.getMajorById(id);
         if (data.error) {
           console.log(data.error);
         } else {
-          setNewProduct(data.data);
+          setNewVoucher(data.data);
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error("Error fetching MajorInPlan:", error);
       }
     };
-
     fetchData(); // Gọi hàm fetchData để thực hiện việc gọi API
   }, [id]); // Đảm bảo useEffect được gọi lại khi id thay đổi
   const initialValues = {
-    name: newProduct?.name || "",
-    code: newProduct?.code || 1,
-    abbreviation: newProduct?.abbreviation || "",
-    description: newProduct?.description || 0,
-    yearEstablish: newProduct?.yearEstablish || 0,
-    admissionPolicy: newProduct?.admissionPolicy || "",
-    contactInfo: newProduct?.contactInfo || "",
-    address: newProduct?.address || "",
-
+    name: newVoucher?.name || "",
+    code: newVoucher?.code || "",
+    effectiveDate: newVoucher?.effectiveDate || "",
+    note: newVoucher?.note || ""
   };
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required("Major name is required"),
     code: Yup.string().required("Code is required"),
-    abbreviation: Yup.string().required("Abbreviation is required"),
-    description: Yup.string().required("Description is required"),
-    yearEstablish: Yup.number().required("Year of establishment is required"),
-    admissionPolicy: Yup.string().required("Admission policy is required"),
-    contactInfo: Yup.string().required("Contact information is required"),
-    address: Yup.string().required("Address is required"),
+    effectiveDate: Yup.string().required("Effective date is required"),
+    note: Yup.string().required("Note is required")
   });
 
   const handleLogin = (formValue) => {
     setLoading(true);
-    AuthService.putUniversity(id, { ...formValue }).then((data) => {
-      console.log(data);
+    AuthService.putMajor(id, { ...formValue }).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        toast.success("Edit University successfully", {
+        toast.success("Edit MajorInPlan successfully", {
           // position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -67,22 +55,23 @@ function EditUniversityDetail() {
           progress: undefined,
           theme: "dark",
         });
-        navigate("/admin/university");
+        navigate("/admin/mjp");
       }
     });
     setLoading(false);
   };
 
   return (
-    newProduct && (
+    newVoucher && (
       <HeaderCreate
-        homeUrl="/admin/university"
-        btnSaveTitle="Update University"
-        btnSaveType={SAVE_TYPE.CREATE}
+        homeUrl="/admin/mjp"
+        btnSaveTitle="Update MajorInPlan"
+        btnSaveType={SAVE_TYPE.UPDATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}
         className="mb-5"
       >
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -90,6 +79,7 @@ function EditUniversityDetail() {
         >
           {({ isSubmitting }) => (
             <Form>
+
               <div className="mb-4">
                 <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                   Name
@@ -105,6 +95,7 @@ function EditUniversityDetail() {
                   className="text-red-500 text-xs italic"
                 />
               </div>
+
               <div className="mb-4">
                 <label htmlFor="code" className="block text-gray-700 text-sm font-bold mb-2">
                   Code
@@ -120,92 +111,34 @@ function EditUniversityDetail() {
                   className="text-red-500 text-xs italic"
                 />
               </div>
+
               <div className="mb-4">
-                <label htmlFor="abbreviation" className="block text-gray-700 text-sm font-bold mb-2">
-                  Abbreviation
+                <label htmlFor="effectiveDate" className="block text-gray-700 text-sm font-bold mb-2">
+                  Effective Date
                 </label>
                 <Field
-                  name="abbreviation"
+                  name="effectiveDate"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="abbreviation"
+                  name="effectiveDate"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />
               </div>
+
               <div className="mb-4">
-                <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
-                  Description
+                <label htmlFor="note" className="block text-gray-700 text-sm font-bold mb-2">
+                  Note
                 </label>
                 <Field
-                  name="description"
+                  name="note"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="description"
-                  component="div"
-                  className="text-red-500 text-xs italic"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="yearEstablish" className="block text-gray-700 text-sm font-bold mb-2">
-                  Year Established
-                </label>
-                <Field
-                  name="yearEstablish"
-                  type="number"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <ErrorMessage
-                  name="yearEstablish"
-                  component="div"
-                  className="text-red-500 text-xs italic"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="admissionPolicy" className="block text-gray-700 text-sm font-bold mb-2">
-                  Admission Policy
-                </label>
-                <Field
-                  name="admissionPolicy"
-                  type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <ErrorMessage
-                  name="admissionPolicy"
-                  component="div"
-                  className="text-red-500 text-xs italic"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="contactInfo" className="block text-gray-700 text-sm font-bold mb-2">
-                  Contact Info
-                </label>
-                <Field
-                  name="contactInfo"
-                  type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <ErrorMessage
-                  name="contactInfo"
-                  component="div"
-                  className="text-red-500 text-xs italic"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
-                  Address
-                </label>
-                <Field
-                  name="address"
-                  type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <ErrorMessage
-                  name="address"
+                  name="note"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />
@@ -235,4 +168,4 @@ function EditUniversityDetail() {
   );
 }
 
-export default EditUniversityDetail;
+export default EditMajorDetail;

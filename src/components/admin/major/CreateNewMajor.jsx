@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import AuthService from "../../../api/majorInplan.service";
+import AuthService from "../../../api/major.service";
 function CreateNewMajor() {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -12,33 +12,36 @@ function CreateNewMajor() {
   };
   const initialValues = {
     majorName: "",
-    schoolYear: "",
-    numberOfStudent: 1,
+    code: "",
+    effectiveDate: "",
+    note: ""
   };
   const validationSchema = Yup.object({
     majorName: Yup.string().required("Major name is required"),
-    schoolYear: Yup.string().required("School year is required"),
-    numberOfStudent: Yup.number().required("Number of students is required").min(1, "Number of students must be at least 1"),
+    code: Yup.string().required("Code is required"),
+    effectiveDate: Yup.string().required("Effective date is required"),
+    note: Yup.string().required("Note is required")
   });
+
 
   const handleLogin = (formValue) => {
     setLoading(true);
-    AuthService.postMajorInPlan({ ...formValue }).then((data) => {
+    AuthService.postMajor({ ...formValue }).then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        navigate("/admin/mjp");
+        navigate("/admin/major");
       }
       setLoading(false);
     });
   };
 
-  
+
   return (
     <HeaderCreate
-      homeUrl="/admin/mjp"
-      btnSaveTitle="voucher"
+      homeUrl="/admin/major"
+      btnSaveTitle="Major"
       btnSaveType={SAVE_TYPE.CREATE}
       handleClickSaveCreate={handleCreateNewVoucher}
       disabledBtn={false}
@@ -68,32 +71,48 @@ function CreateNewMajor() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="schoolYear" className="block text-gray-700 text-sm font-bold mb-2">
-                School Year
+              <label htmlFor="code" className="block text-gray-700 text-sm font-bold mb-2">
+                Code
               </label>
               <Field
-                name="schoolYear"
+                name="code"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="schoolYear"
+                name="code"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="numberOfStudent" className="block text-gray-700 text-sm font-bold mb-2">
-                Number of Students
+              <label htmlFor="effectiveDate" className="block text-gray-700 text-sm font-bold mb-2">
+                Effective Date
               </label>
               <Field
-                name="numberOfStudent"
-                type="number"
+                name="effectiveDate"
+                type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage
-                name="numberOfStudent"
+                name="effectiveDate"
+                component="div"
+                className="text-red-500 text-xs italic"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="note" className="block text-gray-700 text-sm font-bold mb-2">
+                Note
+              </label>
+              <Field
+                name="note"
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <ErrorMessage
+                name="note"
                 component="div"
                 className="text-red-500 text-xs italic"
               />
