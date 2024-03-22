@@ -32,12 +32,12 @@ function AdminMainNav() {
     },
     {
       id: 3,
-      name: "Vouchers",
+      name: "MajorInPlan",
       icon: <CollectionIcon />,
-      href: "/admin/vouchers",
+      href: "/admin/mjp",
       isActive:
-        location.pathname.includes("/admin/vouchers") ||
-        location.pathname.includes("/admin/vouchers"),
+        location.pathname.includes("/admin/mjp") ||
+        location.pathname.includes("/admin/mjp"),
     },
     {
       id: 4,

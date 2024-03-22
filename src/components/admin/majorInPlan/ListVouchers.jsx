@@ -9,13 +9,9 @@ import ShowDetail from "../ShowDetail";
 import Pagination from "../Pagination";
 import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
-import AuthService from "../../../api/voucher.service";
+import AuthService from "../../../api/majorInplan.service";
 import { toast } from "react-toastify";
 function ListVouchers() {
-  // const listVouchers = {
-  //   data: [{ id: 1, productName: "Snack", description: "Big and nice" }],
-  //   total: 5,
-  // };
   const [searchParam, setSearchParam] = useState();
   const [listVouchers, setlistVouchers] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,12 +22,12 @@ function ListVouchers() {
 
   // const debouncedSearchValue = useDebounce(searchParam, 500);
   const fetchVoucher = async () => {
-    await AuthService.getVoucher().then((data) => {
+    await AuthService.getMajorInPlan().then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        setlistVouchers(data.data.payload);
+        setlistVouchers(data.data);
       }
     });
 
@@ -39,13 +35,13 @@ function ListVouchers() {
   useEffect(() => {
     fetchVoucher();
   }, [load]);
-  const deleteVoucherFunc = (id) => {
+  const deleteMJIPFunc = (id) => {
     setLoad(true)
-    AuthService.deleteVoucher(id).then((data) => {
+    AuthService.deleteMajorInPlan(id).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        toast.success("Delete voucher successfully", {
+        toast.success("Delete MajorInPlan successfully", {
           // position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -55,7 +51,7 @@ function ListVouchers() {
           progress: undefined,
           theme: "dark",
         });
-        setLoad(data.data.payload);
+        setLoad(data.data);
       }
     });
     setLoad(false)
@@ -66,31 +62,31 @@ function ListVouchers() {
       Header: " ",
       columns: [
         {
-          Header: "VoucherCode",
-          accessor: (data) => <p>{data?.voucherCode}</p>,
+          Header: "Majorname",
+          accessor: (data) => <p>{data?.majorName}</p>,
         },
         {
-          Header: "Discount(%)",
-          accessor: (data) => <p>{data?.discountPercentage}</p>,
+          Header: "Number of Students",
+          accessor: (data) => <p>{data?.numberOfStudent}</p>,
         },
         {
-          Header: "EndDate",
-          accessor: (data) => <p>{data?.endDate}</p>,
+          Header: "SchoolYear",
+          accessor: (data) => <p>{data?.schoolYear}</p>,
         },
         {
           Header: " ",
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                {/* <Link to={`/admin/vouchers/${data?.id}`}>
+                {/* <Link to={`/admin/mjp/${data?.id}`}>
                   <ShowDetail />
                 </Link> */}
-                <Link className="" to={`/admin/vouchers/${data?.id}/edit`}>
+                <Link className="" to={`/admin/mjp/${data?._id}/edit`}>
                   <EditButton />
                 </Link>
                 <DeleteBtn
-                  id={data?.id}
-                  deleteFunction={deleteVoucherFunc}
+                  id={data?._id}
+                  deleteFunction={deleteMJIPFunc}
                   queryKey={"getListOfficialMember"}
                 />
               </div>
@@ -103,7 +99,7 @@ function ListVouchers() {
 
   return (
     <div>
-      <Title >List Voucher</Title>
+      <Title >List MajorInPlan</Title>
       <div className="flex flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
         <SearchInput
           placeholder="Search by name"
@@ -111,7 +107,7 @@ function ListVouchers() {
           value={searchParam || ""}
         />
         <Link to={`/admin/vouchers/create`}>
-          <PrimaryBtn className="min-w-[180px]">+ Add Voucher</PrimaryBtn>
+          <PrimaryBtn className="min-w-[180px]">+ Add MajorInP</PrimaryBtn>
         </Link>
       </div>
       <div className="bg-white table-style block-border">

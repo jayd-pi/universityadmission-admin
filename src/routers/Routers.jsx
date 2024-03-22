@@ -1,20 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import ListProducts from "../components/admin/product/ListProducts";
-import ListVouchers from "../components/admin/voucher/ListVouchers";
+import ListVouchers from "../components/admin/majorInPlan/ListVouchers";
 import AdminDashboard from "../components/admin/dashboard/AdminDashboard";
 import CreateNewProduct from "../components/admin/product/CreateNewProduct";
 import ViewProductDetail from "../components/admin/product/ViewProductDetail";
 import EditProductDetail from "../components/admin/product/EditProductDetail";
-import CreateNewVoucher from "../components/admin/voucher/CreateNewVoucher";
-import EditVoucherDetail from "../components/admin/voucher/EditVoucherDetail";
-import Cart from "../pages/cart/Cart";
-import Wishlist from "../pages/home/Wishlist";
-import Order from "../pages/cart/Order";
-import EditProfile from "../pages/login/EditProfile";
+import CreateNewVoucher from "../components/admin/majorInPlan/CreateNewVoucher";
+import EditVoucherDetail from "../components/admin/majorInPlan/EditVoucherDetail";
+
 
 const Routers = () => {
   return (
@@ -46,7 +42,7 @@ const Routers = () => {
       />
 
       <Route
-        path="admin/products/create"
+        path="admin/university/create"
         element={
           <AdminLayout>
             <CreateNewProduct />
@@ -54,7 +50,7 @@ const Routers = () => {
         }
       />
       <Route
-        path="admin/products/:id"
+        path="admin/university/:id"
         element={
           <AdminLayout>
             <ViewProductDetail />
@@ -62,7 +58,7 @@ const Routers = () => {
         }
       />
       <Route
-        path="admin/products/:id/edit"
+        path="admin/university/:id/edit"
         element={
           <AdminLayout>
             <EditProductDetail />
@@ -70,7 +66,7 @@ const Routers = () => {
         }
       />
         <Route
-        path="admin/vouchers"
+        path="admin/mjp"
         element={
           <AdminLayout>
             <ListVouchers/>
@@ -78,7 +74,7 @@ const Routers = () => {
         }
       />
       <Route
-        path="admin/vouchers/create"
+        path="admin/mjp/create"
         element={
           <AdminLayout>
             <CreateNewVoucher />
@@ -86,44 +82,11 @@ const Routers = () => {
         }
       />
       <Route
-        path="admin/vouchers/:id/edit"
+        path="admin/mjp/:id/edit"
         element={
           <AdminLayout>
             <EditVoucherDetail />
           </AdminLayout>
-        }
-      />
-
-      <Route
-        path="cart"
-        element={
-          <MainLayout>
-            <Cart />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="wishlist"
-        element={
-          <MainLayout>
-            <Wishlist />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="order"
-        element={
-          <MainLayout>
-            <Order />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="editProfile"
-        element={
-          <MainLayout>
-            <EditProfile />
-          </MainLayout>
         }
       />
     </Routes>
