@@ -82,7 +82,7 @@ function UserDropdown() {
         }}
         onClick={toggleOpenUserMenu}
       >
-        <div className="smooth-transform cursor-pointer z-50 flex w-full min-w-[170px] flex-col rounded-lg bg-[#fff] shadow-md">
+        <div className="smooth-transform text-dark cursor-pointer z-50 flex w-full min-w-[170px] flex-col rounded-lg bg-[#fff] shadow-md">
           <a
             href="/profile"
             className="flex gap-3 px-4 py-3 rounded-b-lg hover:bg-sky-100"
