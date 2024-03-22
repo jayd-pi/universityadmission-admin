@@ -4,18 +4,13 @@ import SearchInput from "../SearchInput";
 import { Link } from "react-router-dom";
 import PrimaryBtn from "../PrimaryBtn";
 import Table from "../Table";
-// import useDebounce from "../../../custom-hooks/useDebounce";
 import ShowDetail from "../ShowDetail";
 import Pagination from "../Pagination";
 import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
-import AuthService from "../../../api/product.service";
+import AuthService from "../../../api/university.service";
 import { toast } from "react-toastify";
 function ListProducts() {
-  // const listProducts = {
-  //   data: [{ id: 1, productName: "Snack", description: "Big and nice" }],
-  //   total: 5,
-  // };
   const [searchParam, setSearchParam] = useState();
   const [listProducts, setListProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -24,12 +19,12 @@ function ListProducts() {
   // const debouncedSearchValue = useDebounce(searchParam, 500);
 
   const fetProduct = async () => {
-    AuthService.getProduct().then((data) => {
+    AuthService.getUniversity().then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
-        setListProducts(data.data.data);
+        setListProducts(data.data);
       }
     });
   }
@@ -38,11 +33,11 @@ function ListProducts() {
   }, [load]);
   const deleteProductFunc = (id) => {
     setLoad(true);
-    AuthService.deleteProduct(id).then((data) => {
+    AuthService.deleteUniversity(id).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        toast.success("Delete product successfully", {
+        toast.success("Delete University successfully", {
           // position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -52,7 +47,7 @@ function ListProducts() {
           progress: undefined,
           theme: "dark",
         });
-        setLoad(data.data.data);
+        setLoad(data.data);
       }
     });
     setLoad(false);
@@ -64,38 +59,38 @@ function ListProducts() {
       columns: [
         {
           Header: "Name",
-          accessor: (data) => <p>{data?.title}</p>,
+          accessor: (data) => <p>{data?.name}</p>,
         },
         {
-          Header: "Price (%)",
-          accessor: (data) => <p>{data?.price}</p>,
+          Header: "Code",
+          accessor: (data) => <p>{data?.code}</p>,
         },
         {
-          Header: "Color",
-          accessor: (data) => <p>{data?.color}</p>,
-        },
-        {
-          Header: "Brand",
-          accessor: (data) => <p>{data?.brand}</p>,
-        },
-        {
-          Header: "Size",
-          accessor: (data) => <p>{data?.size}</p>,
-        },
-        {
-          Header: "Product Description",
+          Header: "Description",
           accessor: (data) => <p>{data?.description}</p>,
+        },
+        {
+          Header: "YearEstablish",
+          accessor: (data) => <p>{data?.yearEstablish}</p>,
+        },
+        {
+          Header: "AdmissionPolicy",
+          accessor: (data) => <p>{data?.admissionPolicy}</p>,
+        },
+        {
+          Header: "Address",
+          accessor: (data) => <p>{data?.address}</p>,
         },
         {
           Header: " ",
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                <Link className="" to={`/admin/products/${data?.productId}/edit`}>
+                <Link className="" to={`/admin/products/${data?._id}/edit`}>
                   <EditButton />
                 </Link>
                 <DeleteBtn
-                  id={data?.productId}
+                  id={data?._id}
                   deleteFunction={deleteProductFunc}
                   queryKey={"getListOfficialMember"}
                 />
@@ -109,7 +104,7 @@ function ListProducts() {
 
   return (
     <div>
-      <Title >List Products</Title>
+      <Title >List University</Title>
       <div className="flex flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
         <SearchInput
           placeholder="Search by name"
@@ -117,7 +112,7 @@ function ListProducts() {
           value={searchParam || ""}
         />
         <Link to={`/admin/products/create`}>
-          <PrimaryBtn className="min-w-[180px]">+ Add Product</PrimaryBtn>
+          <PrimaryBtn className="min-w-[180px]">+ Add University</PrimaryBtn>
         </Link>
       </div>
       <div className="bg-white table-style block-border">

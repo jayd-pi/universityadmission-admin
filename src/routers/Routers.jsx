@@ -1,15 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "../pages/home/Home";
-import Login from "../pages/login/Login";
-import Signup from "../pages/signup/Signup";
-import About from "../pages/about/About";
-import Booking from "../pages/booking/Booking";
-import Contact from "../pages/contact/Contact";
-import Shop from "../pages/shop/Shop";
-import Checkout from "../pages/checkout/Checkout";
-import ProductDetails from "../pages/productDetails/ProductDetails";
 import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import ListProducts from "../components/admin/product/ListProducts";
@@ -28,80 +19,7 @@ import EditProfile from "../pages/login/EditProfile";
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="home" />} />
-
-      <Route
-        path="home"
-        element={
-          <MainLayout>
-            <Home />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="login"
-        element={
-          <MainLayout>
-            <Login />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="signup"
-        element={
-          <MainLayout>
-            <Signup />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="shop"
-        element={
-          <MainLayout>
-            <Shop />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="product/:_id"
-        element={
-          <MainLayout>
-            <ProductDetails />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="about"
-        element={
-          <MainLayout>
-            <About />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="contact"
-        element={
-          <MainLayout>
-            <Contact />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="booking"
-        element={
-          <MainLayout>
-            <Booking />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="checkout"
-        element={
-          <MainLayout>
-            <Checkout />
-          </MainLayout>
-        }
-      />
+      <Route path="/" element={<Navigate to="admin" />} />
       <Route
         path="admin"
         element={
@@ -119,7 +37,7 @@ const Routers = () => {
         }
       />
       <Route
-        path="admin/products"
+        path="admin/university"
         element={
           <AdminLayout>
             <ListProducts />

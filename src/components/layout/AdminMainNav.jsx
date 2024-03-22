@@ -22,12 +22,12 @@ function AdminMainNav() {
     },
     {
       id: 2,
-      name: "Products",
+      name: "University",
       icon: <CollectionIcon />,
-      href: "/admin/products",
+      href: "/admin/university",
       isActive:
-        location.pathname.includes("/admin/products") ||
-        location.pathname.includes("/admin/products"),
+        location.pathname.includes("/admin/university") ||
+        location.pathname.includes("/admin/university"),
       // subMenu: subMenuCollections,
     },
     {

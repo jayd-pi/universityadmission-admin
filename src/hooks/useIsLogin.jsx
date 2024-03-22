@@ -4,6 +4,6 @@ export function useIsLogin() {
   const { user } = useSelector((state) => state.auth);
   return {
     isLogin: user,
-    isAdmin : user && user?.role === "admin"
+    // isAdmin : user && user?.role === "admin"
   };
 }

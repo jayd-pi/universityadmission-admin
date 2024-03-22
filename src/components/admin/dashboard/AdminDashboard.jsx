@@ -19,11 +19,11 @@ function AdminDashboard() {
     data: [{ id: 1, productName: "Cat" }],
   };
   const navigate = useNavigate();
-  const { isAdmin } = useIsLogin();
-  if (!isAdmin) {
-    console.log(!isAdmin);
-    return <Navigate to="/home" />
-  }
+  // const { isAdmin } = useIsLogin();
+  // if (!isAdmin) {
+  //   console.log(!isAdmin);
+  //   return <Navigate to="/home" />
+  // }
   return (
     <div>
       <Title>Dashboards</Title>
