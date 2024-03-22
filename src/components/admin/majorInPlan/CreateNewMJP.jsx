@@ -5,7 +5,7 @@ import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../api/majorInplan.service";
-function CreateNewVoucher() {
+function CreateNewMJP() {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const handleCreateNewVoucher = () => {
@@ -14,7 +14,7 @@ function CreateNewVoucher() {
     majorName: "",
     schoolYear: "",
     numberOfStudent: 1,
-    subjectGroup: []
+    // subjectGroup: []
   };
   const validationSchema = Yup.object({
     majorName: Yup.string().required("Major name is required"),
@@ -34,16 +34,16 @@ function CreateNewVoucher() {
       setLoading(false);
     });
   };
-  const handleSelectChange = (e, setFieldValue, fieldName) => {
-    const options = e.target.options;
-    const selectedOptions = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedOptions.push(options[i].getAttribute("name"));
-      }
-    }
-    setFieldValue(fieldName, selectedOptions);
-  };
+  // const handleSelectChange = (e, setFieldValue, fieldName) => {
+  //   const options = e.target.options;
+  //   const selectedOptions = [];
+  //   for (let i = 0; i < options.length; i++) {
+  //     if (options[i].selected) {
+  //       selectedOptions.push(options[i].getAttribute("name"));
+  //     }
+  //   }
+  //   setFieldValue(fieldName, selectedOptions);
+  // };
   
   return (
     <HeaderCreate
@@ -108,7 +108,7 @@ function CreateNewVoucher() {
                 className="text-red-500 text-xs italic"
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="subjectGroup" className="block text-gray-700 text-sm font-bold mb-2">
               SubjectGroup
               </label>
@@ -126,7 +126,7 @@ function CreateNewVoucher() {
                 component="div"
                 className="text-red-500 text-xs italic"
               />
-            </div>
+            </div> */}
 
             <div className="flex items-center justify-between">
               <button
@@ -151,4 +151,4 @@ function CreateNewVoucher() {
   );
 }
 
-export default CreateNewVoucher;
+export default CreateNewMJP;

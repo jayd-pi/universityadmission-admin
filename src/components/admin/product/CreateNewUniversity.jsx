@@ -5,7 +5,7 @@ import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../api/product.service";
-function CreateNewProduct() {
+function CreateNewUniversity() {
   let navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -22,9 +22,9 @@ function CreateNewProduct() {
     admissionPolicy: "",
     contactInfo: "",
     address: "",
-    major: [],
-    admissionPlan: [],
-    province: []
+    // major: [],
+    // admissionPlan: [],
+    // province: []
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
@@ -35,9 +35,9 @@ function CreateNewProduct() {
     admissionPolicy: Yup.string().required("Admission policy is required"),
     contactInfo: Yup.string().required("Contact information is required"),
     address: Yup.string().required("Address is required"),
-    major: Yup.array().required("Major is required"),
-    admissionPlan: Yup.array().required("Admission plan is required"),
-    province: Yup.array().required("Province is required")
+    // major: Yup.array().required("Major is required"),
+    // admissionPlan: Yup.array().required("Admission plan is required"),
+    // province: Yup.array().required("Province is required")
   });
 
   const handleLogin = (formValue) => {
@@ -53,17 +53,17 @@ function CreateNewProduct() {
     setLoading(false);
   };
 
-  const handleSelectChange = (e, setFieldValue, fieldName) => {
-    const options = e.target.options;
-    const selectedOptions = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedOptions.push(options[i].getAttribute("name"));
-      }
-    }
-    setFieldValue(fieldName, selectedOptions);
-  };
-  
+  // const handleSelectChange = (e, setFieldValue, fieldName) => {
+  //   const options = e.target.options;
+  //   const selectedOptions = [];
+  //   for (let i = 0; i < options.length; i++) {
+  //     if (options[i].selected) {
+  //       selectedOptions.push(options[i].getAttribute("name"));
+  //     }
+  //   }
+  //   setFieldValue(fieldName, selectedOptions);
+  // };
+
 
   return (
     <HeaderCreate
@@ -201,7 +201,7 @@ function CreateNewProduct() {
                 className="text-red-500 text-xs italic"
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="major" className="block text-gray-700 text-sm font-bold mb-2">
                 Major
               </label>
@@ -238,8 +238,7 @@ function CreateNewProduct() {
                 component="div"
                 className="text-red-500 text-xs italic"
               />
-            </div>
-
+            </div> */}
             <div className="flex items-center justify-between">
               <button
                 type="submit"
@@ -263,4 +262,4 @@ function CreateNewProduct() {
   );
 }
 
-export default CreateNewProduct;
+export default CreateNewUniversity;

@@ -11,7 +11,7 @@ import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
 import AuthService from "../../../api/majorInplan.service";
 import { toast } from "react-toastify";
-function ListVouchers() {
+function ListMJP() {
   const [searchParam, setSearchParam] = useState();
   const [listVouchers, setlistVouchers] = useState([]);
   const [page, setPage] = useState(1);
@@ -129,4 +129,4 @@ function ListVouchers() {
   );
 }
 
-export default ListVouchers;
+export default ListMJP;

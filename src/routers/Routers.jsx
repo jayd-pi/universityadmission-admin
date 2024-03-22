@@ -3,13 +3,12 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AdminLayout from "../components/layout/AdminLayout";
 import AdminDashboard from "../components/admin/dashboard/AdminDashboard";
-import CreateNewProduct from "../components/admin/product/CreateNewProduct";
-import ListProducts from "../components/admin/product/ListProducts";
-import ViewProductDetail from "../components/admin/product/ViewProductDetail";
-import EditProductDetail from "../components/admin/product/EditProductDetail";
-import ListVouchers from "../components/admin/majorInPlan/ListVouchers";
-import CreateNewVoucher from "../components/admin/majorInPlan/CreateNewVoucher";
-import EditVoucherDetail from "../components/admin/majorInPlan/EditVoucherDetail";
+import CreateNewUniversity from "../components/admin/product/CreateNewUniversity";
+import ListUniversity from "../components/admin/product/ListUniversity";
+import EditUniversityDetail from "../components/admin/product/EditUniversityDetail";
+import ListMJP from "../components/admin/majorInPlan/ListMJP";
+import CreateNewMJP from "../components/admin/majorInPlan/CreateNewMJP";
+import EditMJPDetail from "../components/admin/majorInPlan/EditMJPDetail";
 import ListMajor from "../components/admin/major/ListMajor";
 
 
@@ -37,7 +36,7 @@ const Routers = () => {
         path="admin/university"
         element={
           <AdminLayout>
-            <ListProducts />
+            <ListUniversity />
           </AdminLayout>
         }
       />
@@ -46,15 +45,7 @@ const Routers = () => {
         path="admin/university/create"
         element={
           <AdminLayout>
-            <CreateNewProduct />
-          </AdminLayout>
-        }
-      />
-      <Route
-        path="admin/university/:id"
-        element={
-          <AdminLayout>
-            <ViewProductDetail />
+            <CreateNewUniversity />
           </AdminLayout>
         }
       />
@@ -62,7 +53,7 @@ const Routers = () => {
         path="admin/university/:id/edit"
         element={
           <AdminLayout>
-            <EditProductDetail />
+            <EditUniversityDetail />
           </AdminLayout>
         }
       />
@@ -70,7 +61,7 @@ const Routers = () => {
         path="admin/mjp"
         element={
           <AdminLayout>
-            <ListVouchers />
+            <ListMJP />
           </AdminLayout>
         }
       />
@@ -78,7 +69,7 @@ const Routers = () => {
         path="admin/mjp/create"
         element={
           <AdminLayout>
-            <CreateNewVoucher />
+            <CreateNewMJP />
           </AdminLayout>
         }
       />
@@ -86,7 +77,7 @@ const Routers = () => {
         path="admin/mjp/:id/edit"
         element={
           <AdminLayout>
-            <EditVoucherDetail />
+            <EditMJPDetail />
           </AdminLayout>
         }
       />

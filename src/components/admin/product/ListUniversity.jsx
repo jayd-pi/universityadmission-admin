@@ -10,7 +10,7 @@ import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
 import AuthService from "../../../api/university.service";
 import { toast } from "react-toastify";
-function ListProducts() {
+function ListUniversity() {
   const [searchParam, setSearchParam] = useState();
   const [listProducts, setListProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -134,4 +134,4 @@ function ListProducts() {
   );
 }
 
-export default ListProducts;
+export default ListUniversity;
