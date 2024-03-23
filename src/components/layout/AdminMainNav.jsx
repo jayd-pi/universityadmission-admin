@@ -57,6 +57,15 @@ function AdminMainNav() {
         location.pathname.includes("/admin/admissionForm") ||
         location.pathname.includes("/admin/admissionForm"),
     },
+    {
+      id: 5,
+      name: "AdmissionMethod",
+      icon: <CollectionIcon />,
+      href: "/admin/admissionMethod",
+      isActive:
+        location.pathname.includes("/admin/admissionMethod") ||
+        location.pathname.includes("/admin/admissionMethod"),
+    },
   ];
 
   return (
