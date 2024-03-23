@@ -65,8 +65,6 @@ function EditAdmissionFormDetail() {
         homeUrl="/admin/admissionMethod"
         btnSaveTitle="AdmissionMethod"
         btnSaveType={SAVE_TYPE.UPDATE}
-        // handleClickSaveCreate={handleCreateNewProduct}
-        // disabledBtn={false}
         className="mb-5"
       >
 
