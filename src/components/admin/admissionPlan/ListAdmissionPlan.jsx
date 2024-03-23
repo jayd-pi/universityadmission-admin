@@ -11,7 +11,7 @@ import EditButton from "../EditButton";
 import DeleteBtn from "../DeleteBtn";
 import AuthService from "../../../api/admissionMethod.service";
 import { toast } from "react-toastify";
-function ListFormAdmision() {
+function ListAdmissionPlan() {
   const [searchParam, setSearchParam] = useState();
   const [listVouchers, setlistVouchers] = useState([]);
   const [page, setPage] = useState(1);
@@ -21,7 +21,7 @@ function ListFormAdmision() {
 
   // const debouncedSearchValue = useDebounce(searchParam, 500);
   const fetchVoucher = async () => {
-    await AuthService.getAdmissionMethod().then((data) => {
+    await AuthService.getAdmissionPlan().then((data) => {
       console.log(data);
       if (data.error) {
         console.log(data.error);
@@ -36,7 +36,7 @@ function ListFormAdmision() {
   }, [load]);
   const deleteAdmissionFormFunc = (id) => {
     setLoad(true)
-    AuthService.deleteAdmissionMethod(id).then((data) => {
+    AuthService.deleteAdmissionPlan(id).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -61,23 +61,23 @@ function ListFormAdmision() {
       Header: " ",
       columns: [
         {
-          Header: "Name",
+          Header: "SchoolYear",
           accessor: (data) => <p>{data?.name}</p>,
         },
         {
-          Header: "AdmissionScore",
+          Header: "University",
           accessor: (data) => <p>{data?.AdmissionScore}</p>,
         },
         {
-          Header: "NumberOfStudent",
-          accessor: (data) => <p>{data?.NumberOfStudent}</p>,
+          Header: "PlantDescription",
+          accessor: (data) => <p>{data?.plantDescription}</p>,
         },
         {
           Header: " ",
           accessor: (data) => {
             return (
               <div className="flex justify-end gap-4">
-                <Link className="" to={`/admin/admissionMethod/${data?._id}/edit`}>
+                <Link className="" to={`/admin/admissionPlan/${data?._id}/edit`}>
                   <EditButton />
                 </Link>
                 <DeleteBtn
@@ -95,15 +95,15 @@ function ListFormAdmision() {
 
   return (
     <div>
-      <Title >List AdmissionMethod</Title>
+      <Title >List AdmissionPlan</Title>
       <div className="flex flex-col gap-4 py-5 md:items-center md:flex-row md:justify-end">
         <SearchInput
           placeholder="Search by name"
           onChange={(e) => setSearchParam(e.target.value)}
           value={searchParam || ""}
         />
-        <Link to={`/admin/admissionMethod/create`}>
-          <PrimaryBtn className="min-w-[180px]">+ Add AdmissionMethod</PrimaryBtn>
+        <Link to={`/admin/admissionPlan/create`}>
+          <PrimaryBtn className="min-w-[180px]">+ Add AdmissionPlan</PrimaryBtn>
         </Link>
       </div>
       <div className="bg-white table-style block-border">
@@ -123,4 +123,4 @@ function ListFormAdmision() {
     </div>
   );
 }
-export default ListFormAdmision;
+export default ListAdmissionPlan;

@@ -18,6 +18,8 @@ import EditAdmissionForm from "../components/admin/admissionForm/EditMajorDetail
 import ListAdmissionMethod from "../components/admin/admissionMethod/ListAdmissionMethod";
 import CreateAdmissionMethod from "../components/admin/admissionMethod/CreateAdmissionMethod";
 import EditAdmissionMethod from "../components/admin/admissionMethod/EditAdmissionMethod";
+import ListAdmissionPlan from "../components/admin/admissionPlan/ListAdmissionPlan";
+import CreateAdmissionPlan from "../components/admin/admissionPlan/CreateAdmissionPlan";
 
 
 const Routers = () => {
@@ -158,6 +160,22 @@ const Routers = () => {
         element={
           <AdminLayout>
             <EditAdmissionMethod />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/admissionPlan"
+        element={
+          <AdminLayout>
+            <ListAdmissionPlan />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/admissionPlan/create"
+        element={
+          <AdminLayout>
+            <CreateAdmissionPlan />
           </AdminLayout>
         }
       />

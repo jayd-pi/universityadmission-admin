@@ -5,7 +5,7 @@ import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../api/admissionMethod.service";
-function CreateAdmissionMethod() {
+function CreateAdmissionPlan() {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const handleCreateNewVoucher = () => {
@@ -38,8 +38,8 @@ function CreateAdmissionMethod() {
 
   return (
     <HeaderCreate
-      homeUrl="/admin/admissionMethod"
-      btnSaveTitle="AdmissionMethod"
+      homeUrl="/admin/admissionPlan"
+      btnSaveTitle="AdmissionPlan"
       btnSaveType={SAVE_TYPE.CREATE}
       handleClickSaveCreate={handleCreateNewVoucher}
       disabledBtn={false}
@@ -125,4 +125,4 @@ function CreateAdmissionMethod() {
   );
 }
 
-export default CreateAdmissionMethod;
+export default CreateAdmissionPlan;
