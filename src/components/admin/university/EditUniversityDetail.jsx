@@ -77,7 +77,7 @@ function EditUniversityDetail() {
     newProduct && (
       <HeaderCreate
         homeUrl="/admin/university"
-        btnSaveTitle="Update University"
+        btnSaveTitle="University"
         btnSaveType={SAVE_TYPE.CREATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}

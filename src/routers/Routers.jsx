@@ -12,6 +12,9 @@ import EditMJPDetail from "../components/admin/majorInPlan/EditMJPDetail";
 import ListMajor from "../components/admin/major/ListMajor";
 import CreateNewMajor from "../components/admin/major/CreateNewMajor";
 import EditMajorDetail from "../components/admin/major/EditMajorDetail";
+import ListAdmissionForm from "../components/admin/admissionForm/ListAdmissionForm";
+import CreateAdmissionForm from "../components/admin/admissionForm/CreateNewAdForm";
+import EditAdmissionForm from "../components/admin/admissionForm/EditMajorDetail";
 
 
 const Routers = () => {
@@ -104,6 +107,30 @@ const Routers = () => {
         element={
           <AdminLayout>
             <EditMajorDetail />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/admissionForm"
+        element={
+          <AdminLayout>
+            <ListAdmissionForm />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/admissionForm/create"
+        element={
+          <AdminLayout>
+            <CreateAdmissionForm />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="admin/admissionForm/:id/edit"
+        element={
+          <AdminLayout>
+            <EditAdmissionForm />
           </AdminLayout>
         }
       />

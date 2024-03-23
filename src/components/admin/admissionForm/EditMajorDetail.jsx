@@ -4,9 +4,9 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import AuthService from "../../../api/major.service";
+import AuthService from "../../../api/admissionForm.service";
 import { toast } from "react-toastify";
-function EditMajorDetail() {
+function EditAdmissionFormDetail() {
   let navigate = useNavigate();
   const { id } = useParams();
   const [newVoucher, setNewVoucher] = useState(false);
@@ -14,29 +14,27 @@ function EditMajorDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AuthService.getMajorById(id);
+        const data = await AuthService.getAdmissionFormById(id);
         if (data.error) {
           console.log(data.error);
         } else {
           setNewVoucher(data.data);
         }
       } catch (error) {
-        console.error("Error fetching MajorInPlan:", error);
+        console.error("Error fetching AdmissionForm:", error);
       }
     };
     fetchData(); // Gọi hàm fetchData để thực hiện việc gọi API
   }, [id]); // Đảm bảo useEffect được gọi lại khi id thay đổi
   const initialValues = {
-    name: newVoucher?.name || "",
-    code: newVoucher?.code || "",
-    effectiveDate: newVoucher?.effectiveDate || "",
-    note: newVoucher?.note || ""
+    formType: newVoucher?.formType || "",
+    formDate: newVoucher?.formDate || "",
+    submissionDeadline: newVoucher?.submissionDeadline || ""
   };
   const validationSchema = Yup.object({
-    name: Yup.string().required("Major name is required"),
-    code: Yup.string().required("Code is required"),
-    effectiveDate: Yup.string().required("Effective date is required"),
-    note: Yup.string().required("Note is required")
+    formType: Yup.string().required("FormType is required"),
+    formDate: Yup.string().required("FormDate is required"),
+    submissionDeadline: Yup.string().required("SubmissionDeadline date is required")
   });
 
   const handleLogin = (formValue) => {
@@ -64,8 +62,8 @@ function EditMajorDetail() {
   return (
     newVoucher && (
       <HeaderCreate
-        homeUrl="/admin/mjp"
-        btnSaveTitle="Major"
+        homeUrl="/admin/admissionForm"
+        btnSaveTitle="AdmissionForm"
         btnSaveType={SAVE_TYPE.UPDATE}
         // handleClickSaveCreate={handleCreateNewProduct}
         // disabledBtn={false}
@@ -81,64 +79,46 @@ function EditMajorDetail() {
             <Form>
 
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-                  Name
+                <label htmlFor="formType" className="block text-gray-700 text-sm font-bold mb-2">
+                  Form Type
                 </label>
                 <Field
-                  name="name"
+                  name="formType"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="name"
+                  name="formType"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="code" className="block text-gray-700 text-sm font-bold mb-2">
-                  Code
+                <label htmlFor="formDate" className="block text-gray-700 text-sm font-bold mb-2">
+                  Form Date
                 </label>
                 <Field
-                  name="code"
+                  name="formDate"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="code"
+                  name="formDate"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="effectiveDate" className="block text-gray-700 text-sm font-bold mb-2">
-                  Effective Date
+                <label htmlFor="submissionDeadline" className="block text-gray-700 text-sm font-bold mb-2">
+                  Submission Deadline
                 </label>
                 <Field
-                  name="effectiveDate"
+                  name="submissionDeadline"
                   type="text"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <ErrorMessage
-                  name="effectiveDate"
-                  component="div"
-                  className="text-red-500 text-xs italic"
-                />
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="note" className="block text-gray-700 text-sm font-bold mb-2">
-                  Note
-                </label>
-                <Field
-                  name="note"
-                  type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <ErrorMessage
-                  name="note"
+                  name="submissionDeadline"
                   component="div"
                   className="text-red-500 text-xs italic"
                 />
@@ -168,4 +148,4 @@ function EditMajorDetail() {
   );
 }
 
-export default EditMajorDetail;
+export default EditAdmissionFormDetail;
