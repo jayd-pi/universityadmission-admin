@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import HeaderCreate from "../HeaderCreate";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import AuthService from "../../../api/product.service";
+import AuthService from "../../../api/university.service";
 function CreateNewUniversity() {
   let navigate = useNavigate();
 
